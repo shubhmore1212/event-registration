@@ -1,26 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
 
-function App() {
+import Layout from "./Layout";
+import LoginContainer from "./pages/Login";
+import LandingContainer from "./pages/LandingPage";
+import AdminContainer from "./pages/Admin/Dashboard";
+import RegistrantContainer from "./pages/Registrant/Dashboard";
+import OrganizerContainer from "./pages/Organizer/Dashboard";
+
+import RequireAuth from "./RequireAuth";
+
+import "./App.css";
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        {/* public routes */}
+        <Route path="/" element={<LandingContainer />} />
+        <Route path="login" element={<LoginContainer />} />
 
-export default App;
+        {/* admin routes */}
+        <Route element={<RequireAuth allowedRoles={[3]} />}>
+          <Route path="/admin" element={<AdminContainer />} />
+        </Route>
+
+        {/* organizer routes */}
+        <Route element={<RequireAuth allowedRoles={[2]} />}>
+          <Route path="/organizer" element={<OrganizerContainer />} />
+        </Route>
+
+        {/* registrant routes */}
+        <Route element={<RequireAuth allowedRoles={[1]} />}>
+          <Route path="/register" element={<RegistrantContainer />} />
+        </Route>
+
+        <Route path="*" element={<Navigate to={"/"} replace />} />
+      </Route>
+    </Routes>
+  );
+};
+
+export default React.memo(App);
