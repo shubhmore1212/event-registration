@@ -1,0 +1,42 @@
+/* Login Image Content */
+
+.login-image-content {
+  position: relative;
+  top: 30vh;
+  left: 2vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#sub-heading > h2 {
+  letter-spacing: 2px;
+}
+
+.login-image-content > p {
+  margin-top: 40px;
+  color: white;
+}
+
+#sub-heading {
+  margin-top: 40px;
+  font-family: sans-serif;
+  font-size: x-large;
+  color: white;
+}
+
+.login-image-content > button {
+  height: 40px;
+  width: 180px;
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  border-radius: 10px;
+  margin-top: 40px;
+  color: white;
+  background-color: rgba(109, 118, 118, 0.527);
+  cursor: pointer;
+}
+
+/* End Login Image Content */

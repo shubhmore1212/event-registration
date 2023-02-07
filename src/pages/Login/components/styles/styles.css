@@ -1,0 +1,151 @@
+.nav-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+.nav-links {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 3rem;
+}
+
+.nav-credentials {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  padding: 20px;
+}
+
+/* Login */
+
+.login-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.login-form {
+  height: 100vh;
+  width: 60vw;
+  /* background-color: red; */
+}
+
+.login-image {
+  height: 100vh;
+  width: 40vw;
+  background-image: url("https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2069&q=80");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position-x: center;
+  background-color: rgba(38, 51, 53, 0.646);
+  background-blend-mode: multiply;
+}
+
+.login-position {
+  display: block;
+  position: absolute;
+  top: 10%;
+  /* background-color: green; */
+}
+
+/* End Login */
+
+/* Login Form */
+
+.login-content {
+  height: 80vh;
+  width: 60vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.sub-heading {
+  margin-top: 5rem;
+  font-size: x-large;
+}
+
+.login-social-links {
+  display: flex;
+  flex-direction: row;
+  margin-top: 1rem;
+  gap: 1rem;
+}
+
+#login-heading {
+  position: relative;
+  left: 40%;
+}
+
+.log-in-btn {
+  height: 40px;
+  width: 180px;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  border-radius: 10px;
+  color: white;
+  background-color: rgb(108, 16, 237);
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.input-email {
+  height: 40px;
+  width: 350px;
+  border-radius: 6px;
+  border: 1px solid black;
+  text-indent: 10px;
+}
+
+.input-password {
+  height: 40px;
+  width: 350px;
+  border-radius: 6px;
+  border: 1px solid black;
+  text-indent: 10px;
+}
+
+.input-password:-ms-input-placeholder {
+  padding-left: 10px;
+}
+
+.form-login {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.form-control {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.form-container {
+  display: block;
+  margin-top: 1rem;
+}
+
+.form-control > label {
+  padding-bottom: 10px;
+}
+
+/* End Login Form */
+
+/* Logo */
+
+.logo {
+  font-size: 2rem;
+  font-weight: 300;
+}
+
+.logo-bold {
+  font-weight: 900;
+}
+
+/* End Logo */
