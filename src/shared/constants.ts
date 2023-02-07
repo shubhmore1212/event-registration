@@ -1,0 +1,6 @@
+export const FORM_OPTIONS={
+    INPUT:"INPUT",
+    TEXTAREA:"TEXTAREA",
+    DATE:"DATE",
+    SELECT_BOX:"SELECT_BOX"
+}

@@ -1,0 +1,11 @@
+/* Error form message */
+
+.error-form-msg {
+  color: red;
+  font-size: small;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* End Error form message */
