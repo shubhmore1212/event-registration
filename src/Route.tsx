@@ -1,18 +1,21 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 
 import App from "./App";
 
-import { AuthProvider } from "./context/AuthProvider";
+const queryClient = new QueryClient();
 
 const RouteComponent = () => {
   return (
     <Router>
-      <AuthProvider>
+      <QueryClientProvider client={queryClient}>
         <Routes>
           <Route path="/*" element={<App />} />
         </Routes>
-      </AuthProvider>
+        <ReactQueryDevtools />
+      </QueryClientProvider>
     </Router>
   );
 };

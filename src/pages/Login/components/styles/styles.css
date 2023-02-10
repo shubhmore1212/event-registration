@@ -94,20 +94,13 @@
   cursor: pointer;
 }
 
-.input-email {
+input {
   height: 40px;
   width: 350px;
   border-radius: 6px;
   border: 1px solid black;
   text-indent: 10px;
-}
-
-.input-password {
-  height: 40px;
-  width: 350px;
-  border-radius: 6px;
-  border: 1px solid black;
-  text-indent: 10px;
+  font-size: 15px;
 }
 
 .input-password:-ms-input-placeholder {

@@ -1,6 +1,7 @@
 import React from "react";
 
 import Navbar from "../../../layouts/Navbar";
+import FooterContent from "../../../shared/components/FooterContent";
 import Contact from "./Contact";
 import Footer from "./Footer";
 import HeroSection from "./HeroSection";
@@ -15,7 +16,8 @@ const Landing = () => {
       <HeroSection />
       <OurServices />
       <Contact />
-      <Footer/>
+      {/* <Footer/> */}
+      <FooterContent />
     </div>
   );
 };

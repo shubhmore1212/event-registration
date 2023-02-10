@@ -4,14 +4,27 @@ import { FormikHelpers } from "formik";
 import * as Yup from "yup";
 
 import LoginComponent from "./components";
-import useAuth from "../../hooks/useAuth";
 
-import axios from "../../services/api/axios";
+import { useUserLogin } from "../../hooks/useQueryHooks";
 
-const LOGIN_URL = "/users/sign_in";
+const setLocalStorageUser = (user: any) => {
+  return JSON.stringify(user);
+};
+
+const handleNavigate = (roleId: number) => {
+  switch (roleId) {
+    case 1:
+      return "/register";
+    case 2:
+      return "/organizer";
+    case 3:
+      return "/admin";
+    default:
+      return "/";
+  }
+};
 
 const LoginContainer = () => {
-  const { setAuth } = useAuth();
   const navigate = useNavigate();
 
   const initialValues = {
@@ -20,54 +33,44 @@ const LoginContainer = () => {
   };
 
   const validationSchema = Yup.object({
-    email: Yup.string().trim().required("Required"),
+    email: Yup.string()
+      .email("Please enter valid email")
+      .trim()
+      .required("Required"),
     password: Yup.string().trim().required("Required"),
   });
 
-  const handleNavigate = (roleId: number) => {
-    console.log(roleId);
-    switch (roleId) {
-      case 1:
-        return "/register";
-      case 2:
-        return "/organizer";
-      case 3:
-        return "/admin";
-      default:
-        return "/";
+  const onSuccess = (response: any) => {
+    const accessToken = response?.headers?.authorization;
+    const role_id = response?.data?.status?.data?.role_id;
+    const user = response?.data?.status?.data;
+
+    localStorage.setItem("token", accessToken);
+    localStorage.setItem("user", setLocalStorageUser(user));
+
+    navigate(handleNavigate(role_id), { replace: true });
+  };
+
+  const onError = (error: any) => {
+    if (!error?.response) {
+      navigate("/error-500", { replace: true });
+    } else if (error.response?.status === 400) {
+      navigate("/error-400", { replace: true });
+    } else if (error.response?.status === 401) {
+      navigate("/error-401", { replace: true });
+    } else {
+      navigate("/error-404", { replace: true });
     }
   };
 
-  const handleSubmit = async (values: any, actions: FormikHelpers<any>) => {
-    try {
-      const response = await axios.post(
-        LOGIN_URL,
-        JSON.stringify({
-          user: {
-            ...values,
-          },
-        }),
-        {
-          headers: { "Content-Type": "application/json" },
-        }
-      );
-      const accessToken = response?.headers?.authorization;
-      const role_id = response?.data?.status?.data?.role_id;
-      const user = response?.data?.status?.data;
+  const { mutate: userLogin } = useUserLogin({ onSuccess, onError });
 
-      setAuth({ user, roles: [role_id], accessToken });
-      navigate(handleNavigate(role_id), { replace: true });
-    } catch (error: any) {
-      if (!error?.response) {
-        console.log("No Server Response");
-      } else if (error.response?.status === 400) {
-        console.log("Missing Username and Password");
-      } else if (error.response?.status === 401) {
-        console.log("Unauthorized");
-      } else {
-        console.log("Login Failed");
-      }
-    }
+  const handleSubmit = async (values: any, actions: FormikHelpers<any>) => {
+    userLogin({ user: { ...values } });
+  };
+
+  const imageButtonHandler = () => {
+    navigate("/signup", { replace: true });
   };
 
   return (
@@ -75,6 +78,7 @@ const LoginContainer = () => {
       initialValues={initialValues}
       validationSchema={validationSchema}
       handleSubmit={handleSubmit}
+      buttonHandler={imageButtonHandler}
     />
   );
 };

@@ -7,6 +7,7 @@ interface IProps {
   initialValues: { email: string; password: string };
   validationSchema:any;
   handleSubmit: (values: any, actions: FormikHelpers<any>) => void;
+  buttonHandler:()=>void;
 }
 
 const LoginComponent: React.FC<IProps> = (props) => {

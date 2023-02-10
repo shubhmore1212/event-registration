@@ -1,15 +1,7 @@
-import {useState,useEffect} from "react"
-import axios from "axios"
+import { useReducer } from "react";
+import { userReducer, getUser } from "../services/reducer/userReducer";
 
-export const useCurrentUser=(userId:string)=>{
-    const [user,setUser]=useState<any>({});
-
-    useEffect(()=>{
-        (async ()=>{
-            const response=await axios.get(`https://reqres.in/api/users/${userId}`);
-            setUser(response.data);
-        })();
-    },[])
-
-    return user;
-}
+export const useCurrentUser = () => {
+  const state = getUser();
+  return state;
+};

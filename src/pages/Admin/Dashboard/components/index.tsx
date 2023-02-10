@@ -1,7 +1,8 @@
 import React from "react";
+import Layout from "./Layout";
 
-const AdminDashboard=({user}:any)=>{
-    return(<h1>Hi, {user?.first_name} !</h1>)
+const AdminDashboard=(props:any)=>{
+    return(<><Layout {...props} /></>)
 }
 
 export default React.memo(AdminDashboard);

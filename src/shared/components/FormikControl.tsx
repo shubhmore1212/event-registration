@@ -1,20 +1,29 @@
-import { DatePicker } from "./DatePicker";
 import { InputBox } from "./InputBox";
-import { TextArea } from "./TextArea";
+import { SelectBox } from "./SelectBox";
 
 import { FORM_OPTIONS } from "../constants";
 
-const { INPUT, TEXTAREA, DATE } = FORM_OPTIONS;
+const { INPUT, SELECT_BOX } = FORM_OPTIONS;
 
 interface IProps {
   control: string;
+  type?:
+    | "text"
+    | "date"
+    | "time"
+    | "textarea"
+    | "select"
+    | "email"
+    | "password"
+    | "number";
   name: string;
   label: string;
   className?: string;
   id?: string;
   style?: string;
   disabled?: boolean;
-  placeholder?:string;
+  placeholder?: string;
+  options?: { key: string; value: string }[];
 }
 
 export const FormikControl = (props: IProps) => {
@@ -22,10 +31,8 @@ export const FormikControl = (props: IProps) => {
   switch (control) {
     case INPUT:
       return <InputBox {...rest} />;
-    case TEXTAREA:
-      return <TextArea {...rest} />;
-    case DATE:
-      return <DatePicker {...rest} />;
+    case SELECT_BOX:
+      return <SelectBox {...rest} />;
     default:
       return <div>Invalid Entry of Formik</div>;
   }
