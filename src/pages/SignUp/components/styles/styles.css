@@ -27,7 +27,7 @@
   position: absolute;
   top: 8%;
   right: 0;
-  /* background-color: green; */
+  overflow-x: hidden;
 }
 
 .signup-form-format {

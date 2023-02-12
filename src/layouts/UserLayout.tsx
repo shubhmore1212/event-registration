@@ -14,6 +14,8 @@ interface BlankLayoutProps {
   isOrganizer?: boolean;
   isRegistrant?: boolean;
   buttonHandler?: () => void;
+  homeNavigation?: () => void;
+  userName?:string
 }
 
 const UserLayout = (props: BlankLayoutProps) => {
@@ -24,6 +26,8 @@ const UserLayout = (props: BlankLayoutProps) => {
     isOrganizer = false,
     isRegistrant = false,
     buttonHandler,
+    homeNavigation,
+    userName
   } = props;
   return (
     <>
@@ -38,6 +42,8 @@ const UserLayout = (props: BlankLayoutProps) => {
             isOrganizer={isOrganizer}
             isRegistrant={isRegistrant}
             buttonHandler={buttonHandler}
+            homeNavigation={homeNavigation}
+            userName={userName}
           />
           <Paper elevation={2} sx={{ p: "10px" }}>
             {children}

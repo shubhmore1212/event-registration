@@ -2,32 +2,35 @@ import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 
 import Layout from "./Layout";
-import SignUp from "./pages/SignUp";
-import LoginContainer from "./pages/Login";
-import LandingContainer from "./pages/LandingPage";
-import AdminContainer from "./pages/Admin/Dashboard";
-import RegistrantContainer from "./pages/Registrant/Dashboard";
-import OrganizerContainer from "./pages/Organizer/Dashboard";
-
 import RequireAuth from "./RequireAuth";
-
-import "./App.css";
-import Error from "./pages/Error/Error";
-import { ERROR } from "./constants";
+import AdminContainer from "./pages/Admin/Dashboard";
 import CreateEvent from "./pages/Organizer/CreateEvent";
 import DisplayEvent from "./pages/Organizer/DisplayEvent";
-import RegisterForm from "./pages/Registrant/RegisterEvent";
 import UpdateEventForm from "./pages/Organizer/UpdateEvent";
+import OrganizerContainer from "./pages/Organizer/Dashboard";
+import RegistrantContainer from "./pages/Registrant/Dashboard";
+import Error from "./pages/Error/Error";
+
+import { ERROR, PUBLIC_ROUTES, ROUTES } from "./constants";
+
+import "./App.css";
+import MouseOverPopover from "./shared/components/MouseOverPopover";
+import DisplayRegisteredEvents from "./pages/Registrant/DisplayRegisteredEvents";
+
+interface RouteProps {
+  path: string;
+  component: React.MemoExoticComponent<() => JSX.Element>;
+}
 
 const App = () => {
   return (
     <Routes>
-      <Route path="/" element={<Layout />}>
+      <Route path={ROUTES.HOME} element={<Layout />}>
         {/* public routes */}
-        <Route path="/" element={<LandingContainer />} />
-        <Route path="login" element={<LoginContainer />} />
-        <Route path="signup" element={<SignUp />} />
-        <Route path="display-event/:event_id" element={<DisplayEvent />} />
+        {PUBLIC_ROUTES.map((route: RouteProps) => (
+          <Route path={route.path} element={<route.component />} />
+        ))}
+        <Route path="/mouse" element={<MouseOverPopover />} />
 
         {/* Error */}
         <Route path="error-400" element={<Error {...ERROR.error400Props} />} />
@@ -51,7 +54,10 @@ const App = () => {
         {/* registrant routes */}
         <Route element={<RequireAuth allowedRoles={[1]} />}>
           <Route path="/register" element={<RegistrantContainer />} />
-          <Route path="/register-form/:event_id" element={<RegisterForm />} />
+          <Route
+            path="/registred-event"
+            element={<DisplayRegisteredEvents />}
+          />
         </Route>
 
         {/* common routes allowed to all roles */}

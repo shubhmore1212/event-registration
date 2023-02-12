@@ -1,18 +1,13 @@
 import React from "react";
-import { FormikHelpers } from "formik";
 
 import LoginForm from "./LoginForm";
 import CredentialImage from "../../../layouts/ui/CredentialImage";
 
-import "./styles/styles.css";
-interface IProps {
-  initialValues: { email: string; password: string };
-  validationSchema: any;
-  handleSubmit: (values: any, actions: FormikHelpers<any>) => void;
-  buttonHandler: () => void;
-}
+import { loginPropsType } from "../../../types/form.types";
 
-const LoginLayout: React.FC<IProps> = (props) => {
+import "./styles/styles.css";
+
+const LoginLayout: React.FC<loginPropsType> = (props) => {
   return (
     <div className="login-container">
       <div className="login-form">

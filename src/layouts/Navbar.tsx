@@ -1,22 +1,47 @@
 import React from "react";
 
+import Logo from "./Logo";
+
 import "./styles/styles.css";
 
-const Navbar = () => {
+interface IProps {
+  loginHandler: () => void;
+  signUpHandler: () => void;
+  isError: boolean;
+  homeNavigation?: () => void;
+}
+
+const Navbar = (props: IProps) => {
+  const { loginHandler, signUpHandler, isError, homeNavigation } = props;
 
   return (
     <div className="nav-container">
       <div className="logo">
-        <h1>Event ExPo</h1>
+        <Logo homeNavigation={homeNavigation} />
       </div>
       <div className="nav-links">
-        <div className="nav-link">HOME</div>
-        <div className="nav-link">ABOUT</div>
-        <div className="nav-link">CONTACT</div>
+        {!isError && (
+          <>
+            <div className="nav-link">
+              <a href="#about" style={{ textDecoration: "none" }}>
+                ABOUT
+              </a>
+            </div>
+            <div className="nav-link">
+              <a href="#contact" style={{ textDecoration: "none" }}>
+                CONTACT
+              </a>
+            </div>
+          </>
+        )}
       </div>
       <div className="nav-credentials">
-        <div className="login">LOGIN</div>
-        <div className="sign-up">SIGN UP</div>
+        <div className="login" onClick={loginHandler}>
+          LOGIN
+        </div>
+        <div className="signup" onClick={signUpHandler}>
+          SIGN UP
+        </div>
       </div>
     </div>
   );

@@ -1,29 +1,13 @@
-import {
-  Box,
-  Card,
-  Button,
-  CardActions,
-  CardContent,
-  Paper,
-  Typography,
-} from "@mui/material";
 import React from "react";
+
+import { Box, Card, CardContent, Paper, Typography } from "@mui/material";
 import CommonTable from "./CommonTable";
 import SelectElementChips from "./SelectElementChips";
 
 import "./styles/styles.css";
 
-const colors = ["red", , "pink", "blue", "green", "violet"];
-const length = colors.length - 1;
-
-interface IProps {
-  state: boolean;
-  toggleState: () => void;
-  events:any;
-}
-
 const AdminLayout = (props: any) => {
-  const {events} = props;
+
   return (
     <>
       <div className="admin-layout">
@@ -66,7 +50,7 @@ const AdminLayout = (props: any) => {
         <SelectElementChips {...props} />
       </div>
       <div className="admin-table">
-        <CommonTable events={events} />
+        <CommonTable {...props} />
       </div>
     </>
   );

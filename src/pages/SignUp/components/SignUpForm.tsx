@@ -1,29 +1,24 @@
-import { Form, Formik, FormikHelpers } from "formik";
 import React from "react";
+import { Form, Formik } from "formik";
+
 import Logo from "../../../layouts/Logo";
 import CredentialContent from "../../../layouts/ui/CredentialContent";
 import { FormikControl } from "../../../shared/components/FormikControl";
+
 import { FORM_OPTIONS } from "../../../shared/constants";
-import { ISignUpFormProps } from "../constants";
+import { ROLES } from "../../../constants/constants";
+
+import { ISignUpFormProps } from "../../../types/form.types";
+
 import "./styles/styles.css";
 
-const ROLES = [
-  {
-    key: "1",
-    value: "Registrant",
-  },
-  {
-    key: "2",
-    value: "Organizer",
-  },
-];
-
 const SignUpForm: React.FC<ISignUpFormProps> = (props) => {
-  const { initialValues, validationSchema, handleSubmit } = props;
+  const { initialValues, validationSchema, handleSubmit, homeNavigation } =
+    props;
 
   return (
     <>
-      <Logo id="login-heading" />
+      <Logo id="login-heading" homeNavigation={homeNavigation} />
       <div className="login-content">
         <CredentialContent
           heading="Create Account"
@@ -36,7 +31,7 @@ const SignUpForm: React.FC<ISignUpFormProps> = (props) => {
         >
           {() => (
             <div className="form-login">
-              <Form>
+              <Form autoComplete="off">
                 <div className="signup-form-format">
                   <FormikControl
                     type="text"
@@ -62,7 +57,7 @@ const SignUpForm: React.FC<ISignUpFormProps> = (props) => {
                     control={FORM_OPTIONS.INPUT}
                     name="contact_no"
                     label="CONTACT"
-                    placeholder="+91-90087654230"
+                    placeholder="90087654230"
                   />
                   <FormikControl
                     className="roles-select-box"

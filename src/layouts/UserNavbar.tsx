@@ -1,5 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { ROUTES } from "../constants";
+import MouseOverPopover from "../shared/components/MouseOverPopover";
 import SearchBox from "../shared/components/SearchBox";
 
 import Logo from "./Logo";
@@ -12,23 +14,32 @@ interface IProps {
   isOrganizer?: boolean;
   isRegistrant?: boolean;
   buttonHandler?: () => void;
+  homeNavigation?: () => void;
+  userName?: string;
 }
 
 const UserNavbar = (props: any) => {
   const navigate = useNavigate();
-  const { isSearchBox, isAdmin, isOrganizer, isRegistrant, buttonHandler } =
-    props;
+  const {
+    isSearchBox,
+    isAdmin,
+    isOrganizer,
+    isRegistrant,
+    buttonHandler,
+    homeNavigation,
+    userName
+  } = props;
 
   const logoutHandler = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
-    navigate("/", { replace: true });
+    navigate(ROUTES.HOME, { replace: true });
   };
 
   return (
     <div className="nav-container">
       <div className="logo">
-        <Logo />
+        <Logo homeNavigation={homeNavigation} />
       </div>
       <div className="nav-links">
         <div className="search-box-container">
@@ -50,12 +61,15 @@ const UserNavbar = (props: any) => {
             Create Event
           </button>
         )}
+        {isRegistrant && (
+          <button className="search-btn" onClick={buttonHandler}>
+            Registered Events
+          </button>
+        )}
       </div>
       <div className="nav-credentials">
         <div className="log-out">
-          <button className="log-out-btn" onClick={logoutHandler}>
-            LOGOUT
-          </button>
+          <MouseOverPopover logoutHandler={logoutHandler} userName={userName} />
         </div>
       </div>
     </div>

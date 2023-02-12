@@ -18,11 +18,16 @@ export const PUT = async (url: string, payload: any) => {
     .then((res) => res);
 };
 
-export const DELETE = (url: string) => {
-  return instance.delete(url).then((res) => res.data);
+export const DELETE = (url: string, payload: any) => {
+  console.log(url);
+  return instance
+    .delete(url, { headers: { Authorization: payload.accessToken } })
+    .then((res) => res.data);
 };
 
 export const POST = (url: string, body: any) => {
+  console.log(body);
+
   return instance
     .post(url, body, { headers: { Authorization: body.accessToken } })
     .then((res) => res);

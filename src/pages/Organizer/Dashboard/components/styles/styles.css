@@ -3,6 +3,8 @@
 .card-display-grid{
     display:flex;
     flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
 }
 
 /* End Organizer Dashboard */

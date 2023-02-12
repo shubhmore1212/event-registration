@@ -1,6 +1,6 @@
+import React from "react";
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
-import { Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 
 const FooterContent = () => {
@@ -46,4 +46,4 @@ const FooterContent = () => {
   );
 };
 
-export default FooterContent;
+export default React.memo(FooterContent);

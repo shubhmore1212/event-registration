@@ -1,12 +1,11 @@
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useCurrentUser } from "../../../hooks/useCurrentUser";
-import {
-  useCreateEvent,
-  useGetEventById,
-  useUpdateEvent,
-} from "../../../hooks/useQueryHooks";
+import { toast } from "react-toastify";
+import { ROUTES } from "../../../constants";
 
+import { useCurrentUser } from "../../../hooks/useCurrentUser";
+import { useGetEventById, useUpdateEvent } from "../../../hooks/useQueryHooks";
+import UserLayout from "../../../layouts/UserLayout";
 import UpdateEventComponent from "./components";
 
 const UpdateEventFormContainer = () => {
@@ -14,13 +13,13 @@ const UpdateEventFormContainer = () => {
   const { user, accessToken } = useCurrentUser();
   const { event_id } = useParams();
 
-  const onSuccess = async (values: any) => {
-    console.log(values);
-    navigate("/organizer");
+  const onSuccess = (values: any) => {
+    toast("Event updated successfully 🥳")
+    navigate(ROUTES.ORGANIZER);
   };
 
   const onError = (values: any) => {
-    console.log(values);
+    toast("Oops! Something went wrogn 🤪");
   };
 
   const onGetEventSuccess = (values: any) => {
@@ -56,9 +55,9 @@ const UpdateEventFormContainer = () => {
   }
 
   return (
-    <>
+    <UserLayout userName={user.first_name}>
       <UpdateEventComponent initialValues={event} onSubmit={onSubmit} />
-    </>
+    </UserLayout>
   );
 };
 

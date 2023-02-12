@@ -1,17 +1,22 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import UserLayout from "../../../layouts/UserLayout";
+import OrganizerDashboard from "./components";
 import { useCurrentUser } from "../../../hooks/useCurrentUser";
 import { useGetOrganizedEvent } from "../../../hooks/useQueryHooks";
-import UserLayout from "../../../layouts/UserLayout";
 
-import OrganizerDashboard from "./components";
+import { ROUTES } from "../../../constants";
 
 const OrganizerConatiner = () => {
   const navigate = useNavigate();
   const { user, accessToken } = useCurrentUser();
 
   const navigationHandler = () => {
-    navigate("/create-event");
+    navigate(ROUTES.CREATE_EVENT);
+  };
+
+  const displayEventHandler = (id: number) => {
+    navigate(`/display-event/${id}`);
   };
 
   const onSuccess = (values: any) => {
@@ -46,8 +51,12 @@ const OrganizerConatiner = () => {
       isSearchBox={true}
       isOrganizer={true}
       buttonHandler={navigationHandler}
+      userName={user.first_name}
     >
-      <OrganizerDashboard events={events} />
+      <OrganizerDashboard
+        events={events}
+        displayEventHandler={displayEventHandler}
+      />
     </UserLayout>
   );
 };

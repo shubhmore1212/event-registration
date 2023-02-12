@@ -1,25 +1,19 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import UserLayout from "../../../../layouts/UserLayout";
+
 import MediaCard from "../../../../shared/components/MediaCard";
 
 import "./styles/styles.css";
 
-const OrganizerDashboard = (props: any) => {
-  const navigate = useNavigate();
+interface IProps {
+  events: any;
+  displayEventHandler: (id: number) => void;
+}
 
-  const navigationHandler = () => {
-    navigate("/create-event");
-  };
-
-  const displayEventHandler = (id: number) => {
-    navigate(`/display-event/${id}`);
-  };
-
+const OrganizerDashboard = (props: IProps) => {
   return (
     <div className="card-display-grid">
       {props?.events?.map((event: any) => (
-        <div key={event.id} onClick={() => displayEventHandler(event.id)}>
+        <div key={event.id} onClick={() => props.displayEventHandler(event.id)}>
           <MediaCard event={event} />
         </div>
       ))}

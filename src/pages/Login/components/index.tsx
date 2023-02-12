@@ -1,17 +1,11 @@
 import React from "react";
-import { FormikHelpers } from "formik";
 
 import LoginLayout from "./Layout";
 
-interface IProps {
-  initialValues: { email: string; password: string };
-  validationSchema:any;
-  handleSubmit: (values: any, actions: FormikHelpers<any>) => void;
-  buttonHandler:()=>void;
-}
+import { loginPropsType } from "../../../types/form.types";
 
-const LoginComponent: React.FC<IProps> = (props) => {
-  return <LoginLayout {...props}/>;
+const LoginComponent: React.FC<loginPropsType> = (props) => {
+  return <LoginLayout {...props} />;
 };
 
 export default React.memo(LoginComponent);

@@ -1,12 +1,25 @@
 import LoginContainer from "./pages/Login";
-import SignUpPage from "./layouts/SignUp.page";
 import LandingContainer from "./pages/LandingPage";
 import IMAGES from "./assets";
+import SignUp from "./pages/SignUp";
 
 export const ROUTES = {
   HOME: "/",
   LOGIN: "/login",
   SIGNUP: "/signup",
+  //Error
+  ERROR_400: "/error-404",
+  ERROR_401: "/error-401",
+  ERROR_404: "/error-404",
+  ERROR_422: "/error-422",
+  ERROR_500: "/error-500",
+  //Admin
+  ADMIN: "/admin",
+  //Organizer
+  ORGANIZER: "/organizer",
+  CREATE_EVENT:"/create-event",
+  //Register
+  REGISTER: "/register",
 };
 
 export const PUBLIC_ROUTES = [
@@ -19,8 +32,8 @@ export const PUBLIC_ROUTES = [
     component: LoginContainer,
   },
   {
-    path: ROUTES.HOME,
-    component: SignUpPage,
+    path: ROUTES.SIGNUP,
+    component: SignUp,
   },
 ];
 

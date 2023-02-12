@@ -2,23 +2,21 @@ import React from "react";
 
 import Navbar from "../../../layouts/Navbar";
 import FooterContent from "../../../shared/components/FooterContent";
-import Contact from "./Contact";
-import Footer from "./Footer";
+import CreatorSection from "./CreatorSection";
 import HeroSection from "./HeroSection";
 import OurServices from "./OurServices";
 
 import "./styles/styles.css";
 
-const Landing = () => {
+const Landing = (props: any) => {
   return (
-    <div className="box">
-      <Navbar />
+    <>
+      <Navbar {...props} />
       <HeroSection />
+      <CreatorSection />
       <OurServices />
-      <Contact />
-      {/* <Footer/> */}
       <FooterContent />
-    </div>
+    </>
   );
 };
 

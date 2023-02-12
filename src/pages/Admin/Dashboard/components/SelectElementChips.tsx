@@ -1,4 +1,3 @@
-import * as React from "react";
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
 
@@ -11,7 +10,7 @@ interface IProps {
 
 export default function SelectElementChips(props: IProps) {
   const {state,toggleState}=props;
-  //true==>events
+  
   return (
     <Stack direction="row" spacing={2}>
       <Chip

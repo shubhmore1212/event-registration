@@ -1,13 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import { useCurrentUser } from "../../../../hooks/useCurrentUser";
-import { useCreateEvent } from "../../../../hooks/useQueryHooks";
-import {
-  eventModeValidation,
-  eventTicketValidation,
-  eventValidation,
-  initialValues,
-} from "../constants";
+
 import {
   EventDescForm,
   EventModeForm,
@@ -15,7 +7,11 @@ import {
 } from "./EventStepsForm";
 import { FormikStep, FormikStepper } from "./FormikStepper";
 
-const sleep = (time: number) => new Promise((acc) => setTimeout(acc, time));
+import {
+  eventModeValidation,
+  eventTicketValidation,
+  eventValidation,
+} from "../constants";
 
 interface IProps {
   initialValues: any;

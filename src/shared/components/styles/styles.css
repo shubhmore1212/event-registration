@@ -9,3 +9,36 @@
 }
 
 /* End Error form message */
+
+/* Mouse Pop Over List */
+
+.pop-over-list {
+  width: 100%;
+  max-width: 360px;
+  background-color: white;
+}
+
+.pop-over-list-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.pop-over-card {
+  height: 120px;
+  width: 250px;
+}
+
+.pop-over-div-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pop-over-avatar {
+  width: 56px;
+  height: 56px;
+}
+
+/* Mouse Pop Over List */

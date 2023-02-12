@@ -1,44 +1,22 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { FormikHelpers } from "formik";
-import * as Yup from "yup";
+import { toast } from "react-toastify";
 
 import LoginComponent from "./components";
-
 import { useUserLogin } from "../../hooks/useQueryHooks";
 
-const setLocalStorageUser = (user: any) => {
-  return JSON.stringify(user);
-};
+import { handleNavigate, setLocalStorageUser } from "../../utils/loginFunction";
+import { capitalizeFirstLetter } from "../../utils/stringOperations";
 
-const handleNavigate = (roleId: number) => {
-  switch (roleId) {
-    case 1:
-      return "/register";
-    case 2:
-      return "/organizer";
-    case 3:
-      return "/admin";
-    default:
-      return "/";
-  }
-};
+import {
+  loginInitialValues,
+  LoginValidationSchema,
+} from "../../constants/formConstants";
+import { ROUTES } from "../../constants";
+import { loginType } from "../../types/form.types";
 
 const LoginContainer = () => {
   const navigate = useNavigate();
-
-  const initialValues = {
-    email: "",
-    password: "",
-  };
-
-  const validationSchema = Yup.object({
-    email: Yup.string()
-      .email("Please enter valid email")
-      .trim()
-      .required("Required"),
-    password: Yup.string().trim().required("Required"),
-  });
 
   const onSuccess = (response: any) => {
     const accessToken = response?.headers?.authorization;
@@ -48,37 +26,55 @@ const LoginContainer = () => {
     localStorage.setItem("token", accessToken);
     localStorage.setItem("user", setLocalStorageUser(user));
 
+    toast(`${capitalizeFirstLetter(`${user?.first_name}`)} logged in successfully`)
     navigate(handleNavigate(role_id), { replace: true });
   };
 
-  const onError = (error: any) => {
-    if (!error?.response) {
-      navigate("/error-500", { replace: true });
-    } else if (error.response?.status === 400) {
-      navigate("/error-400", { replace: true });
-    } else if (error.response?.status === 401) {
-      navigate("/error-401", { replace: true });
-    } else {
-      navigate("/error-404", { replace: true });
+  const errorNavigation = (error: any) => {
+    switch (error.response?.status) {
+      case 400:
+        navigate(ROUTES.ERROR_400, { replace: true });
+        return;
+      case 401:
+        navigate(ROUTES.ERROR_401, { replace: true });
+        return;
+      case 422:
+        navigate(ROUTES.ERROR_422, { replace: true });
+        return;
+      case 404:
+        navigate(ROUTES.ERROR_404, { replace: true });
+        return;
+      default:
+        navigate(ROUTES.ERROR_500, { replace: true });
+        return;
     }
+  };
+
+  const onError = (error: any) => {
+    errorNavigation(error);
   };
 
   const { mutate: userLogin } = useUserLogin({ onSuccess, onError });
 
-  const handleSubmit = async (values: any, actions: FormikHelpers<any>) => {
+  const handleSubmit = async (values: loginType) => {
     userLogin({ user: { ...values } });
   };
 
   const imageButtonHandler = () => {
-    navigate("/signup", { replace: true });
+    navigate(ROUTES.SIGNUP, { replace: true });
+  };
+
+  const homeNavigation = () => {
+    navigate(ROUTES.HOME);
   };
 
   return (
     <LoginComponent
-      initialValues={initialValues}
-      validationSchema={validationSchema}
+      initialValues={loginInitialValues}
+      validationSchema={LoginValidationSchema}
       handleSubmit={handleSubmit}
       buttonHandler={imageButtonHandler}
+      homeNavigation={homeNavigation}
     />
   );
 };

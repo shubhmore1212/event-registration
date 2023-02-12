@@ -23,3 +23,11 @@ export function formatDate(newDate: any) {
   const formatted = `${dayName}, ${date} ${monthName} ${year}`;
   return formatted.toString();
 }
+
+export const getDate = (date: any) => {
+  return new Date(date).toDateString().split(" ").join(",");
+};
+
+export const getTime = (time: any) => {
+  return new Date(time).toLocaleTimeString();
+};

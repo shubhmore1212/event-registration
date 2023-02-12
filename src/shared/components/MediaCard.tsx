@@ -7,14 +7,13 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Box } from "@mui/system";
 import { Avatar, CardHeader, Chip, IconButton, Paper } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
+
+import { colors, length } from "../../constants/constants";
+import { EVENT } from "../../assets";
 
 interface IProps {
   event: any;
 }
-
-const colors = ["red",,"pink", "blue", "green", "violet"];
-const length=colors.length-1;
 
 const MediaCard = (props: IProps) => {
   const { event } = props;
@@ -31,13 +30,12 @@ const MediaCard = (props: IProps) => {
       }}
     >
       <Paper elevation={3}>
-        <Card sx={{ maxWidth: 345 }}>
+        <Card sx={{ maxWidth: 420 }}>
           <CardHeader
             avatar={
               <Avatar
                 sx={{
-                  bgcolor:
-                    colors[Math.floor(Math.random() * length)],
+                  bgcolor: colors[Math.floor(Math.random() * length)],
                 }}
                 aria-label="Event"
               >
@@ -62,8 +60,8 @@ const MediaCard = (props: IProps) => {
             }
           />
           <CardMedia
-            sx={{ height: 140 }}
-            image="/static/images/cards/contemplative-reptile.jpg"
+            sx={{ height: 250 }}
+            image={EVENT[Math.floor(Math.random() * (EVENT.length))]}
             title="green iguana"
           />
           <CardContent>
@@ -77,7 +75,6 @@ const MediaCard = (props: IProps) => {
             </Typography>
           </CardContent>
           <CardActions>
-            {/* <Button size="small">Share</Button> */}
             <Button size="small">Learn More</Button>
           </CardActions>
         </Card>

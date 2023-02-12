@@ -3,7 +3,9 @@ import { useMutation, useQuery } from "react-query";
 import {
   addUser,
   createEvent,
+  deleteEvent,
   getAllEvent,
+  getAllUser,
   getByEventId,
   getOrganizedEvent,
   registerEvent,
@@ -13,6 +15,7 @@ import {
 import {
   RQ_KEY_EVENT_BY_ID,
   RQ_KEY_GET_ALL_EVENT,
+  RQ_KEY_GET_ALL_USER,
   RQ_KEY_ORGANIZED_EVENT,
   RQ_KEY_USER,
 } from "./constants";
@@ -57,6 +60,14 @@ export const useUpdateEvent = (props: any) => {
   });
 };
 
+export const useDeleteEvent = (props: any) => {
+  const { onSuccess, onError } = props;
+  return useMutation(deleteEvent, {
+    onSuccess,
+    onError,
+  });
+};
+
 export const useGetOrganizedEvent = (props: any) => {
   const { onSuccess, onError, payload } = props;
 
@@ -83,15 +94,23 @@ export const useGetAllEvent = (props: any) => {
   );
 };
 
-export const useGetEventById = (props: any) => {
+export const useGetAllUsers = (props: any) => {
   const { onSuccess, onError, payload } = props;
 
   return useQuery<any, AxiosError>(
-    [RQ_KEY_EVENT_BY_ID],
-    () => getByEventId(payload),
+    [RQ_KEY_GET_ALL_USER],
+    () => getAllUser(payload),
     {
       onSuccess,
       onError,
     }
+  );
+};
+
+export const useGetEventById = (props: any) => {
+  const { payload } = props;
+
+  return useQuery<any, AxiosError>([RQ_KEY_EVENT_BY_ID], () =>
+    getByEventId(payload)
   );
 };

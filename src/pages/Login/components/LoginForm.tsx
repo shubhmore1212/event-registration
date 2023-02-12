@@ -4,23 +4,18 @@ import { Formik, Form, FormikHelpers } from "formik";
 import Logo from "../../../layouts/Logo";
 import CredentialContent from "../../../layouts/ui/CredentialContent";
 import { FormikControl } from "../../../shared/components/FormikControl";
-
 import { FORM_OPTIONS } from "../../../shared/constants";
+
+import { loginPropsType } from "../../../types/form.types";
 
 import "./styles/styles.css";
 
-interface IProps {
-  initialValues: { email: string; password: string };
-  validationSchema: any;
-  handleSubmit: (values: any, actions: FormikHelpers<any>) => void;
-}
-
-const LoginForm: React.FC<IProps> = (props) => {
-  const { initialValues, validationSchema, handleSubmit } = props;
+const LoginForm = (props: loginPropsType) => {
+  const { initialValues, validationSchema, handleSubmit ,homeNavigation} = props;
 
   return (
     <>
-      <Logo id="login-heading" />
+      <Logo id="login-heading" homeNavigation={homeNavigation} />
       <div className="login-content">
         <CredentialContent
           heading="Sign In to Event Expo"
@@ -33,7 +28,7 @@ const LoginForm: React.FC<IProps> = (props) => {
         >
           {() => (
             <div className="form-login">
-              <Form>
+              <Form autoComplete="off">
                 <FormikControl
                   type="text"
                   className="input-email"
@@ -43,7 +38,7 @@ const LoginForm: React.FC<IProps> = (props) => {
                   placeholder="john@gmail.com"
                 />
                 <FormikControl
-                  type="text"
+                  type="password"
                   className="input-password"
                   control={FORM_OPTIONS.INPUT}
                   name="password"

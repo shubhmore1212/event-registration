@@ -1,11 +1,11 @@
-import { ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-
 import BlankLayout from "../../layouts/BlankLayout";
+
+import { ROUTES } from "../../constants";
 
 import "./styles/styles.css";
 
@@ -21,12 +21,12 @@ const Error = (props: IErrors) => {
   const navigate = useNavigate();
 
   const handleNavigate = () => {
-    navigate("/", { replace: true });
+    navigate(ROUTES.HOME, { replace: true });
   };
 
   return (
-    <BlankLayout>
-      <Box className="content-center" sx={{mt:5}}>
+    <BlankLayout homeNavigation={handleNavigate}>
+      <Box className="content-center" sx={{ mt: 5 }}>
         <Box className="error-content">
           <Box>
             <Typography variant="h1">{errorNumber}</Typography>

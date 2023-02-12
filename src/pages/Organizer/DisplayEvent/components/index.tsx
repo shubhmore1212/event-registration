@@ -3,7 +3,7 @@ import { Box } from "@mui/system";
 import { format } from "date-fns";
 import React from "react";
 import IMAGES from "../../../../assets";
-import { formatDate } from "../../../../utils/FormatDate";
+import { formatDate, getDate, getTime } from "../../../../utils/FormatDate";
 import EventPageHeroSection from "./EventPageHeroSection";
 
 import "./styles/styles.css";
@@ -11,28 +11,18 @@ import "./styles/styles.css";
 interface IProps {
   event: any;
   role_id: number;
-  buttonName1: string;
-  buttonName2: string;
+  button: { name1: string; name2: string };
   buttonName1Handler: (id: number) => void;
   buttonName2Handler: () => void;
 }
 
 const DisplayEventComponent = (props: IProps) => {
-  const {
-    event,
-    role_id,
-    buttonName1,
-    buttonName2,
-    buttonName1Handler,
-    buttonName2Handler,
-  } = props;
-  const start_date = new Date(event?.start_date)
-    .toDateString()
-    .split(" ")
-    .join(",");
-  const start_time = new Date(event?.start_time).toLocaleTimeString();
-
-  console.log(role_id);
+  const { event, role_id, button, buttonName1Handler, buttonName2Handler } =
+    props;
+  const start_date = getDate(event?.start_date);
+  const start_time = getTime(event?.start_time);
+  const end_date = getDate(event?.end_date);
+  const end_time = getTime(event?.end_time);
 
   return (
     <>
@@ -56,13 +46,13 @@ const DisplayEventComponent = (props: IProps) => {
                 className="display-event-btn-1"
                 onClick={() => buttonName1Handler(event.id)}
               >
-                {buttonName1}
+                {button.name1}
               </button>
               <button
                 className="display-event-btn-2"
                 onClick={buttonName2Handler}
               >
-                {buttonName2}
+                {button.name2}
               </button>
             </div>
           </div>
@@ -74,7 +64,49 @@ const DisplayEventComponent = (props: IProps) => {
             <h2>
               <b>Description</b>
             </h2>
-            <div style={{ width: "600px" }}>{event.description}</div>
+            <div
+              className="event-description-content"
+              style={{ width: "600px" }}
+            >
+              {event.description}
+            </div>
+          </Paper>
+        </Box>
+        <Box className="event-time-box">
+          <Paper className="event-time-box" elevation={3}>
+            <h2>
+              <b>Timing</b>
+            </h2>
+            <div className="event-time-content">
+              <div className="event-time">
+                <span>Start Date:</span> {start_date}
+              </div>
+              <div className="event-time">
+                <span>Start Time:</span> {start_time}
+              </div>
+              <div className="event-time">
+                <span>End Date: </span>
+                {end_date}
+              </div>
+              <div className="event-time">
+                <span>End Time: </span>
+                {end_time}
+              </div>
+              <div className="event-time">
+                <h2 style={{ marginTop: "1rem" }}>Ticket Price:</h2>
+                <p style={{ marginTop: "0.5rem", marginBottom: "1rem" }}>
+                  <span>Entry Fees: </span>
+                  {event.entry_fees} Rs.
+                </p>
+              </div>
+              <div className="event-time">
+                <h2 style={{ marginTop: "1rem" }}>Event Type:</h2>
+                <p style={{ marginTop: "0.5rem", marginBottom: "1rem" }}>
+                  <span>Mode: </span>
+                  {event.mode.toUpperCase()}
+                </p>
+              </div>
+            </div>
           </Paper>
         </Box>
       </div>

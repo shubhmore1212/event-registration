@@ -1,24 +1,39 @@
 import { ReactNode } from "react";
-import { styled } from "@mui/material/styles";
-import Box, { BoxProps } from "@mui/material/Box";
+import Box from "@mui/material/Box";
 import Navbar from "./Navbar";
+import { useNavigate } from "react-router-dom";
+import { ROUTES } from "../constants";
 
 export type BlankLayoutProps = {
+  homeNavigation:()=>void,
   children: ReactNode;
 };
 
-const BlankLayout = ({ children }: BlankLayoutProps) => {
+const BlankLayout = ({ homeNavigation,children }: BlankLayoutProps) => {
+  const navigate = useNavigate();
+
+  const loginHandler = () => {
+    navigate(ROUTES.LOGIN);
+  };
+
+  const signUpHandler = () => {
+    navigate(ROUTES.SIGNUP);
+  };
+
   return (
     <Box
       className="app-content"
       sx={{ minHeight: "100vh", overflowX: "hidden", position: "relative" }}
     >
-      <Navbar />
+      <Navbar
+        isError={true}
+        loginHandler={loginHandler}
+        signUpHandler={signUpHandler}
+        homeNavigation={homeNavigation}
+      />
       {children}
     </Box>
   );
 };
-
-export const getLayout = (page: ReactNode) => <BlankLayout>{page}</BlankLayout>;
 
 export default BlankLayout;

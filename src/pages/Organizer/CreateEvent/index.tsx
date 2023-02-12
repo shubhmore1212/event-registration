@@ -1,28 +1,28 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useCurrentUser } from "../../../hooks/useCurrentUser";
-import {
-  useCreateEvent,
-  useGetOrganizedEvent,
-} from "../../../hooks/useQueryHooks";
-import UserLayout from "../../../layouts/UserLayout";
 
+import { useCurrentUser } from "../../../hooks/useCurrentUser";
+import { useCreateEvent } from "../../../hooks/useQueryHooks";
+import UserLayout from "../../../layouts/UserLayout";
 import CreateEventComponent from "./components";
 
-import "./components/styles/styles.css";
 import { initialValues } from "./constants";
+import { ROUTES } from "../../../constants";
+
+import "./components/styles/styles.css";
+import { toast } from "react-toastify";
 
 const CreateEventContainer = () => {
   const navigate = useNavigate();
   const { user, accessToken } = useCurrentUser();
 
-  const onSuccess = async (values: any) => {
-    console.log(values);
-    navigate("/organizer");
+  const onSuccess = () => {
+    toast("Event Created Successfully🥳");
+    navigate(ROUTES.ORGANIZER);
   };
 
-  const onError = (values: any) => {
-    console.log(values);
+  const onError = () => {
+    toast("Oops! Something went wrogn 🤪");
   };
 
   const { mutate: createEvent } = useCreateEvent({
@@ -30,14 +30,16 @@ const CreateEventContainer = () => {
     onError,
   });
 
-  const onSubmit = async (values: any) => {
+  const onSubmit = (values: any) => {
     createEvent({ ...values, id: user.id, accessToken });
   };
 
- 
+  const homeNavigation = () => {
+    navigate(ROUTES.ORGANIZER);
+  };
 
   return (
-    <UserLayout>
+    <UserLayout homeNavigation={homeNavigation} userName={user.first_name}>
       <CreateEventComponent initialValues={initialValues} onSubmit={onSubmit} />
     </UserLayout>
   );

@@ -1,10 +1,9 @@
 import React from "react";
-import { FormikHelpers } from "formik";
 
 import CredentialImage from "../../../layouts/ui/CredentialImage";
 import SignUpForm from "./SignUpForm";
 
-import { ISignUpFormProps } from "../constants";
+import { ISignUpFormProps } from "../../../types/form.types";
 
 import "./styles/styles.css";
 
