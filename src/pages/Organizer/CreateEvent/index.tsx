@@ -1,16 +1,16 @@
 import React from "react";
+import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-import { useCurrentUser } from "../../../hooks/useCurrentUser";
-import { useCreateEvent } from "../../../hooks/useQueryHooks";
-import UserLayout from "../../../layouts/UserLayout";
 import CreateEventComponent from "./components";
+import { useCurrentUser } from "hooks/useCurrentUser";
+import { useCreateEvent } from "hooks/useQueryHooks";
+import UserLayout from "layouts/UserLayout";
 
 import { initialValues } from "./constants";
 import { ROUTES } from "../../../constants";
 
 import "./components/styles/styles.css";
-import { toast } from "react-toastify";
 
 const CreateEventContainer = () => {
   const navigate = useNavigate();

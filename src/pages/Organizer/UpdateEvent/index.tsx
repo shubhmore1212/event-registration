@@ -1,12 +1,14 @@
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import { ROUTES } from "../../../constants";
 
-import { useCurrentUser } from "../../../hooks/useCurrentUser";
-import { useGetEventById, useUpdateEvent } from "../../../hooks/useQueryHooks";
-import UserLayout from "../../../layouts/UserLayout";
+import Loader from "shared/components/Loader";
 import UpdateEventComponent from "./components";
+import UserLayout from "layouts/UserLayout";
+import { useCurrentUser } from "hooks/useCurrentUser";
+import { useGetEventById, useUpdateEvent } from "hooks/useQueryHooks";
+
+import { ROUTES } from "../../../constants";
 
 const UpdateEventFormContainer = () => {
   const navigate = useNavigate();
@@ -23,7 +25,6 @@ const UpdateEventFormContainer = () => {
   };
 
   const onGetEventSuccess = (values: any) => {
-    console.log({ ...values });
   };
 
   const {
@@ -47,7 +48,7 @@ const UpdateEventFormContainer = () => {
   };
 
   if (isLoading) {
-    return <>Loading...</>;
+    return <Loader />;
   }
 
   if (isError) {

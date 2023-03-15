@@ -1,21 +1,26 @@
-import React, { useState } from "react";
+import React, { lazy, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import * as Yup from "yup";
 
-import { useCurrentUser } from "../../../hooks/useCurrentUser";
+import Loader from "shared/components/Loader";
+import DisplayEventComponent from "./components";
+import CustomModal from "shared/components/CustomModal";
 import {
   useDeleteEvent,
   useGetEventById,
   useRegisterEvent,
-} from "../../../hooks/useQueryHooks";
-import UserLayout from "../../../layouts/UserLayout";
-import DisplayEventComponent from "./components";
+} from "hooks/useQueryHooks";
+import UserLayout from "layouts/UserLayout";
+import { useCurrentUser } from "hooks/useCurrentUser";
 
-import { getButtonName } from "../../../utils/displayEvents";
+import { getButtonName } from "utils/displayEvents";
+
 import { ROUTES } from "../../../constants";
-import CustomModal from "../../../shared/components/CustomModal";
-import RegisterFormComponent from "../../Registrant/RegisterEvent/components";
-import { toast } from "react-toastify";
+
+const RegisterFormComponent = lazy(
+  () => import("pages/Registrant/RegisterEvent/components")
+);
 
 const DisplayEventContainer = () => {
   const navigate = useNavigate();
@@ -35,10 +40,11 @@ const DisplayEventContainer = () => {
         toggleModal();
         return;
       case 2: //organizer
-        navigate(`/update-form/${id}`);
+        navigate(ROUTES.UPDATE_EVENT.replace(":event_id", JSON.stringify(id)));
         return;
       case 3: //admin
         deleteEvent({ id: event_id, accessToken });
+        navigate(ROUTES.ADMIN);
         return;
       default:
         navigate(ROUTES.ERROR_404);
@@ -46,35 +52,27 @@ const DisplayEventContainer = () => {
     }
   };
 
-  const onDeleteSuccess = (values: any) => {
-    console.log("delete", values);
-    navigate("/organizer");
-  };
-
-  const onDeleteError = (values: any) => {
-    console.log("delete", values);
+  const onDeleteError = (error: any) => {
+    toast.warn(error.response?.data);
+    navigate(ROUTES.ERROR_500);
   };
 
   const { mutate: deleteEvent } = useDeleteEvent({
-    onSuccess: onDeleteSuccess,
     onError: onDeleteError,
   });
 
   const buttonName2Handler = () => {
-    console.log("button2");
-
     switch (role_id) {
       case 1: //registrant
-        console.log("registrant");
         return;
       case 2: //organizer
         deleteEvent({ id: event_id, accessToken });
+        navigate(ROUTES.ORGANIZER);
         return;
       case 3: //admin
-        console.log("admin");
         return;
       default:
-        navigate("/error-404");
+        navigate(ROUTES.ERROR_404);
         return;
     }
   };
@@ -83,7 +81,6 @@ const DisplayEventContainer = () => {
     data: event,
     isLoading,
     isError,
-    error,
   } = useGetEventById({
     payload: { id: event_id, accessToken },
   });
@@ -91,7 +88,9 @@ const DisplayEventContainer = () => {
   const onRegisterSuccess = () => {
     toggleModal();
     toast("Hurray! you registred successfully 🥳");
-    navigate(`/display-event/${event_id}`);
+    navigate(
+      ROUTES.DISPLAY_EVENT.replace(":event_id", JSON.stringify(event_id))
+    );
   };
 
   const onRegisterError = () => {
@@ -124,17 +123,17 @@ const DisplayEventContainer = () => {
   };
 
   if (isLoading) {
-    return <>Loading...</>;
+    return <Loader />;
   }
 
   if (isError) {
-    return <div className="error-msg">{error.message}</div>;
+    navigate(ROUTES.ERROR_404);
   }
 
   const homeNavigation = () => {
     switch (role_id) {
       case 1:
-        navigate(ROUTES.REGISTER);
+        navigate(ROUTES.REGISTERANT);
         return;
       case 2:
         navigate(ROUTES.ORGANIZER);

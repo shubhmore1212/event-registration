@@ -1,5 +1,6 @@
 import React from "react";
-import Layout from "../../CreateEvent/components/Layout";
+
+import Layout from "pages/Organizer/CreateEvent/components/Layout";
 
 interface IProps {
     initialValues: any;
@@ -7,7 +8,7 @@ interface IProps {
   }
 
 const UpdateEventFormContainer=(props:IProps)=>{
-    return(<><Layout {...props}/></>)
+    return(<Layout {...props}/>)
 }
 
 export default React.memo(UpdateEventFormContainer);

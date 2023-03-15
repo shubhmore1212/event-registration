@@ -1,6 +1,6 @@
-import React from "react";
-import { FormikControl } from "../../../../shared/components/FormikControl";
-import { FORM_OPTIONS, MODE_OPTIONS } from "../../../../shared/constants";
+import { FormikControl } from "shared/components/FormikControl";
+
+import { FORM_OPTIONS, MODE_OPTIONS } from "shared/constants";
 
 export const EventDescForm = () => {
   return (
@@ -73,7 +73,7 @@ export const EventDescForm = () => {
   );
 };
 
-export const EventModeForm = () => {
+export const  EventModeForm = () => {
   return (
     <div className="signup-form-format">
       <FormikControl

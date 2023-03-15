@@ -1,10 +1,10 @@
+import React from "react";
 import { Paper } from "@mui/material";
 import { Box } from "@mui/system";
-import { format } from "date-fns";
-import React from "react";
-import IMAGES from "../../../../assets";
-import { formatDate, getDate, getTime } from "../../../../utils/FormatDate";
+
 import EventPageHeroSection from "./EventPageHeroSection";
+
+import { getDate, getTime } from "utils/FormatDate";
 
 import "./styles/styles.css";
 
@@ -17,8 +17,7 @@ interface IProps {
 }
 
 const DisplayEventComponent = (props: IProps) => {
-  const { event, role_id, button, buttonName1Handler, buttonName2Handler } =
-    props;
+  const { event, button, buttonName1Handler, buttonName2Handler } = props;
   const start_date = getDate(event?.start_date);
   const start_time = getTime(event?.start_time);
   const end_date = getDate(event?.end_date);

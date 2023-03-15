@@ -1,5 +1,6 @@
-import { Box, Card, CardContent, Paper } from "@mui/material";
 import React from "react";
+import { Box, Card, CardContent, Paper } from "@mui/material";
+
 import CreateEventForm from "./CreateEventForm";
 
 import "./styles/styles.css";

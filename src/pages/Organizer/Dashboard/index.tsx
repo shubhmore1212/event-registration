@@ -1,11 +1,15 @@
-import React from "react";
+import React, { Profiler } from "react";
+import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import UserLayout from "../../../layouts/UserLayout";
+
+import Loader from "shared/components/Loader";
 import OrganizerDashboard from "./components";
-import { useCurrentUser } from "../../../hooks/useCurrentUser";
-import { useGetOrganizedEvent } from "../../../hooks/useQueryHooks";
+import UserLayout from "layouts/UserLayout";
+import { useCurrentUser } from "hooks/useCurrentUser";
+import { useGetOrganizedEvent } from "hooks/useQueryHooks";
 
 import { ROUTES } from "../../../constants";
+import { callback } from "utils/profilerPerfomance";
 
 const OrganizerConatiner = () => {
   const navigate = useNavigate();
@@ -16,15 +20,12 @@ const OrganizerConatiner = () => {
   };
 
   const displayEventHandler = (id: number) => {
-    navigate(`/display-event/${id}`);
-  };
-
-  const onSuccess = (values: any) => {
-    console.log("Success", values);
+    navigate(ROUTES.DISPLAY_EVENT.replace(":event_id", JSON.stringify(id)));
   };
 
   const onError = (error: any) => {
-    console.log("Success", error);
+    toast.warn(error.response?.data);
+    navigate(ROUTES.ERROR_404);
   };
 
   const {
@@ -33,31 +34,32 @@ const OrganizerConatiner = () => {
     isError,
     error,
   } = useGetOrganizedEvent({
-    onSuccess,
     onError,
     payload: { ...user, accessToken },
   });
 
   if (isLoading) {
-    return <>Loading...</>;
+    return <Loader />;
   }
 
   if (isError) {
-    return <div className="error-msg">{error.message}</div>;
+    navigate(ROUTES.ERROR_500);
   }
 
   return (
-    <UserLayout
-      isSearchBox={true}
-      isOrganizer={true}
-      buttonHandler={navigationHandler}
-      userName={user.first_name}
-    >
-      <OrganizerDashboard
-        events={events}
-        displayEventHandler={displayEventHandler}
-      />
-    </UserLayout>
+    <Profiler id="organizer-page" onRender={callback}>
+      <UserLayout
+        isSearchBox={true}
+        isOrganizer={true}
+        buttonHandler={navigationHandler}
+        userName={user.first_name}
+      >
+        <OrganizerDashboard
+          events={events}
+          displayEventHandler={displayEventHandler}
+        />
+      </UserLayout>
+    </Profiler>
   );
 };
 
