@@ -100,7 +100,7 @@ export interface UserData {
   contact_no: string;
   created_at: string;
   role_id: string;
-  status: string;
+  is_active: string;
 }
 
 export function createEventData(
@@ -123,7 +123,7 @@ export function createUserData(
   contact_no: string,
   created_at: string,
   role_id: string,
-  status: string
+  is_active: string
 ): UserData {
   return {
     id,
@@ -133,6 +133,6 @@ export function createUserData(
     contact_no,
     created_at,
     role_id,
-    status,
+    is_active,
   };
 }
