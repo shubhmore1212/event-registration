@@ -1,40 +1,37 @@
 import React from "react";
-
-import { useCurrentUser } from "../../../hooks/useCurrentUser";
-import { useGetAllEvent } from "../../../hooks/useQueryHooks";
-import OrganizerDashboard from "../../Organizer/Dashboard/components";
-import UserLayout from "../../../layouts/UserLayout";
 import { useNavigate } from "react-router-dom";
+
+import OrganizerDashboard from "pages/Organizer/Dashboard/components";
+import { useCurrentUser } from "hooks/useCurrentUser";
+import { useGetAllRegistredEvent } from "hooks/useQueryHooks";
+import UserLayout from "layouts/UserLayout";
+
 import { ROUTES } from "../../../constants";
 
 const DisplayRegisteredEvents = () => {
   const navigate = useNavigate();
   const { user, accessToken } = useCurrentUser();
-  const onSuccess = (values: any) => {
-    console.log("Success", values);
+  const onSuccess = () => {};
+
+  const onError = () => {
+    navigate(ROUTES.ERROR_500);
   };
 
-  const onError = (error: any) => {
-    console.log("Success", error);
-  };
-
-  const {
-    data: events,
-    isLoading,
-    isError,
-    error,
-  } = useGetAllEvent({
+  const { data: events } = useGetAllRegistredEvent({
     onSuccess,
     onError,
-    payload: { ...user, accessToken },
+    payload: { id: 8, ...user, accessToken },
   });
 
   const handleNavigation = (event_id: number) => {
-    navigate(`/display-event/${event_id}`, { replace: false });
+    navigate(
+      ROUTES.DISPLAY_EVENT.replace(":event_id", JSON.stringify(event_id)),
+      { replace: false }
+    );
   };
 
   const homeNavigation = () => {
-    navigate(ROUTES.REGISTER);
+    navigate(ROUTES.REGISTERANT);
   };
 
   return (

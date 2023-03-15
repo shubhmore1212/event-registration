@@ -1,29 +1,32 @@
-import React from "react";
+import React, { Profiler } from "react";
 import { useNavigate } from "react-router-dom";
-import { ROUTES } from "../../../constants";
+import { toast } from "react-toastify";
 
-import { useCurrentUser } from "../../../hooks/useCurrentUser";
-import { useGetAllEvent } from "../../../hooks/useQueryHooks";
-import UserLayout from "../../../layouts/UserLayout";
 import RegistrantDashboard from "./components";
+import { useCurrentUser } from "hooks/useCurrentUser";
+import { useGetAllEvent } from "hooks/useQueryHooks";
+import UserLayout from "layouts/UserLayout";
+import Loader from "shared/components/Loader";
+
+import { ROUTES } from "../../../constants";
+import { callback } from "utils/profilerPerfomance";
+
 
 const RegistrantContainer = () => {
   const navigate = useNavigate();
   const { user, accessToken } = useCurrentUser();
 
-  const onSuccess = (values: any) => {
-    console.log("Success", values);
-  };
+  const onSuccess = () => {};
 
-  const onError = (error: any) => {
-    console.log("Success", error);
+  const onError = (error:any) => {
+    toast.warn(error.response?.data);
+    navigate(ROUTES.ERROR_500);
   };
 
   const {
     data: events,
     isLoading,
     isError,
-    error,
   } = useGetAllEvent({
     onSuccess,
     onError,
@@ -31,26 +34,27 @@ const RegistrantContainer = () => {
   });
 
   if (isLoading) {
-    return <>Loading...</>;
+    return <Loader />;
   }
 
   if (isError) {
-    return <div className="error-msg">{error.message}</div>;
+    navigate(ROUTES.ERROR_500);
   }
 
   const navigationHandler = () => {
-    navigate("/registred-event");
+    navigate(ROUTES.REGISTERED_EVENT);
   };
 
   const handleNavigation = (event_id: any) => {
-    navigate(`/display-event/${event_id}`, { replace: false });
+    navigate(ROUTES.DISPLAY_EVENT.replace(":event_id",JSON.stringify(event_id)), { replace: false });
   };
 
   const homeNavigation = () => {
-    navigate(ROUTES.REGISTER);
+    navigate(ROUTES.REGISTERANT);
   };
 
   return (
+    <Profiler id="registrant-page" onRender={callback}>
     <UserLayout
       isSearchBox={true}
       isRegistrant={true}
@@ -63,6 +67,7 @@ const RegistrantContainer = () => {
         handleNavigation={handleNavigation}
       />
     </UserLayout>
+    </Profiler>
   );
 };
 

@@ -1,6 +1,6 @@
 import React from "react";
 
-import OrganizerDashboard from "../../../Organizer/Dashboard/components";
+import OrganizerDashboard from "pages/Organizer/Dashboard/components";
 
 interface IProps {
   events: any;

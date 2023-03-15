@@ -1,7 +1,7 @@
 import { Form, Formik } from "formik";
 import React from "react";
-import { FormikControl } from "../../../../shared/components/FormikControl";
-import { FORM_OPTIONS } from "../../../../shared/constants";
+import { FormikControl } from "shared/components/FormikControl";
+import { FORM_OPTIONS } from "shared/constants";
 
 interface IProps {
   initialValues: any;
