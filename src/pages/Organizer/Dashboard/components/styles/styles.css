@@ -1,0 +1,11 @@
+/* Organizer Dashboard */
+
+.card-display-grid{
+    display:flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin:30px
+}
+
+/* End Organizer Dashboard */

@@ -1,0 +1,62 @@
+/* Admin Card Section*/
+
+.admin-layout {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.count-section {
+  padding-top: 2%;
+  display: flex;
+  justify-content: center;
+}
+
+.circle-count {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  background-color: #74afa6;
+  border-radius: 50%;
+  height: 200px;
+  width: 200px;
+}
+
+#count-heading {
+  font-size: 80px;
+  padding: 10px;
+}
+
+.admin-chips {
+  display: flex;
+  flex-direction: row-reverse;
+  padding: 20px;
+}
+
+#chip {
+  font-size: 14px;
+  width: 200px;
+  height: 40px;
+  overflow: hidden;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.admin-table {
+  position: relative;
+  left: 12vw;
+  width: 1500px;
+}
+
+/* End Admin Card Section*/
+
+/* Common Table */
+
+.css-1q1u3t4-MuiTableRow-root {
+    cursor: pointer;
+}
+
+/* Common Table */
+
