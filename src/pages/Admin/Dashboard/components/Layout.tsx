@@ -1,19 +1,26 @@
 import React from "react";
-
 import { Box, Card, CardContent, Paper, Typography } from "@mui/material";
+
 import CommonTable from "./CommonTable";
 import SelectElementChips from "./SelectElementChips";
 
 import "./styles/styles.css";
 
 const AdminLayout = (props: any) => {
+  const { counts } = props;
+  const cardData = [
+    { user: "Events", data: counts.events },
+    { user: "Organizer", data: counts.organizer },
+    { user: "Registrants", data: counts.registants },
+    { user: "Registered Users", data: counts.registered_users },
+  ];
 
   return (
     <>
       <div className="admin-layout">
-        {[1, 2, 3].map((e) => (
+        {cardData.map((card: any) => (
           <Box
-            key={e}
+            key={card}
             sx={{
               display: "flex",
               flexWrap: "wrap",
@@ -27,7 +34,7 @@ const AdminLayout = (props: any) => {
               <Card sx={{ maxWidth: 345 }}>
                 <div className="count-section">
                   <div className="circle-count">
-                    <h1 id="count-heading">5000</h1>
+                    <h1 id="count-heading">{card.data}</h1>
                   </div>
                 </div>
                 <CardContent>
@@ -37,11 +44,10 @@ const AdminLayout = (props: any) => {
                     variant="h5"
                     component="div"
                   >
-                    Lizard
+                    {card.user}
                   </Typography>
                 </CardContent>
               </Card>
-              {/* </div> */}
             </Paper>
           </Box>
         ))}

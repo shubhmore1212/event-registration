@@ -2,11 +2,17 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import AdminDashboard from "./components";
-import { useGetAllEvent, useGetAllUsers } from "../../../hooks/useQueryHooks";
-import { useCurrentUser } from "../../../hooks/useCurrentUser";
-import UserLayout from "../../../layouts/UserLayout";
+import {
+  useGetAllCounts,
+  useGetAllEvent,
+  useGetAllUsers,
+} from "hooks/useQueryHooks";
+import { useCurrentUser } from "hooks/useCurrentUser";
+import UserLayout from "layouts/UserLayout";
+import Loader from "shared/components/Loader";
 
 import { ROUTES } from "../../../constants";
+import { toast } from "react-toastify";
 
 const AdminContainer = () => {
   const navigate = useNavigate();
@@ -17,21 +23,16 @@ const AdminContainer = () => {
     setState(!state);
   };
 
-  const onSuccess = (values: any) => {
-    console.log("Success", values);
-  };
-
-  const onError = (error: any) => {
-    console.log("Success", error);
+  const onError = (error:any) => {
+    toast.warn(error.response?.data);
+    navigate(ROUTES.ERROR_500);
   };
 
   const {
     data: events,
     isLoading,
     isError,
-    error,
   } = useGetAllEvent({
-    onSuccess,
     onError,
     payload: { ...user, accessToken },
   });
@@ -42,17 +43,26 @@ const AdminContainer = () => {
     isError: isUserError,
     error: userError,
   } = useGetAllUsers({
-    onSuccess,
     onError,
     payload: { ...user, accessToken },
   });
 
-  if (isLoading) {
-    return <>Loading...</>;
+  const {
+    data: counts,
+    isLoading: isCountLoading,
+    isError: isCountError,
+    error: countError,
+  } = useGetAllCounts({
+    onError,
+    payload: { ...user, accessToken },
+  });
+
+  if (isLoading || isCountLoading || isUserLoading) {
+    return <Loader />;
   }
 
   if (isError) {
-    return <div className="error-msg">{error.message}</div>;
+    navigate(ROUTES.ERROR_404);
   }
 
   const homeNavigation = () => {
@@ -71,6 +81,7 @@ const AdminContainer = () => {
         toggleState={toggleState}
         events={events}
         users={users}
+        counts={counts}
       />
     </UserLayout>
   );

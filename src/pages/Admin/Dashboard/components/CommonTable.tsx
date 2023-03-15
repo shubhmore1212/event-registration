@@ -16,8 +16,9 @@ import {
   eventColumns,
   UserColumn,
   userColumns,
-} from "../../../../types/table.types";
-import { getDate } from "../../../../utils/FormatDate";
+} from "types/table.types";
+import { getDate } from "utils/FormatDate";
+import { ROUTES } from "../../../../constants";
 
 export default function CommonTable(props: any) {
   const { events, users, state } = props;
@@ -26,7 +27,7 @@ export default function CommonTable(props: any) {
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
   const eventRows = state
-    ? events.map((event: any) =>
+    ? events?.map((event: any) =>
         createEventData(
           event.id,
           event.name,
@@ -37,7 +38,7 @@ export default function CommonTable(props: any) {
           event.entry_fees
         )
       )
-    : users.map((user: any) =>
+    : users?.map((user: any) =>
         createUserData(
           user.id,
           user.first_name,
@@ -45,13 +46,10 @@ export default function CommonTable(props: any) {
           user.email,
           user.contact_no,
           getDate(user.created_at),
-          user.role_id===2?"Organizer":"Registrant",
-          user.status,
+          user.role_id === 2 ? "Organizer" : "Registrant",
+          user.is_active
         )
       );
-
-      console.log("==>",eventRows,eventColumns,userColumns);
-      
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
@@ -108,7 +106,7 @@ export default function CommonTable(props: any) {
                           <TableCell key={column.id} align={column.align}>
                             <div
                               onClick={() =>
-                                navigate(`/display-event/${row.id}`)
+                                navigate(ROUTES.DISPLAY_EVENT.replace(":event_id",JSON.stringify(row.id)))
                               }
                             >
                               {value}
