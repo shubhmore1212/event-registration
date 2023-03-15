@@ -1,7 +1,7 @@
 import React from "react";
 
-import Navbar from "../../../layouts/Navbar";
-import FooterContent from "../../../shared/components/FooterContent";
+import Navbar from "layouts/Navbar";
+import FooterContent from "shared/components/FooterContent";
 import CreatorSection from "./CreatorSection";
 import HeroSection from "./HeroSection";
 import OurServices from "./OurServices";

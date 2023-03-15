@@ -214,6 +214,7 @@
   display: block;
   position: relative;
   top: 5%;
+  margin-left: 24px;
 }
 
 .creator-image-subtitle {
@@ -280,7 +281,7 @@
 .service-form {
   height: 100vh;
   width: 60vw;
-  background-color: violet;
+  background-color: #74afa6;
   color: #fff;
 }
 
@@ -309,7 +310,7 @@
 .service-position > h1 {
   font-size: 60px;
   position: relative;
-  left:15%
+  left: 15%;
 }
 
 .service-image-subtitle {

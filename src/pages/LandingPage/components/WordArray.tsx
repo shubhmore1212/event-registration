@@ -2,7 +2,7 @@ import React from "react";
 
 import WordPlay from "./WordPlay";
 
-import { words } from "../../../constants/constants";
+import { words } from "constants/constants";
 
 const WordArray = () => {
   return (

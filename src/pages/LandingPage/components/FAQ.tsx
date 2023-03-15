@@ -4,7 +4,7 @@ import CustomAccordion from "./Accordion";
 
 const faqArray = [
   {
-    question: "Question 1",
+    question: "What is your contact information?",
     answer: "Answer 1",
   },
   {
@@ -40,8 +40,9 @@ const faqArray = [
 const FAQ = () => {
   return (
     <div className="faq-container">
-      {faqArray.map((faq) => (
+      {faqArray.map((faq, idx) => (
         <CustomAccordion
+          key={idx}
           question={faq.question}
           answer={faq.answer}
         ></CustomAccordion>

@@ -1,7 +1,8 @@
-import "./styles/textStyles.css"
+import "./styles/textStyles.css";
 
 const textArray: string[][] = [
-  ["YOU", "ONLY","LIVE"],["ONCE"],
+  ["YOU", "ONLY", "LIVE"],
+  ["ONCE"],
   ["BUT", "IF", "YOU"],
   ["LIVE", "IT", "RIGHT"],
   ["ONCE", "IS", "ENOUGH"],
@@ -10,8 +11,8 @@ const textArray: string[][] = [
 export const AnimateText = () => {
   return (
     <div id="text">
-      {textArray.map((subTextArray: string[]) => (
-        <TextDecoration subTextArray={subTextArray} />
+      {textArray.map((subTextArray: string[], idx: number) => (
+        <TextDecoration key={idx} subTextArray={subTextArray} />
       ))}
     </div>
   );
@@ -32,8 +33,10 @@ export const TextDecoration = (props: { subTextArray: string[] }) => {
 const Enhance = (props: { letters: string }) => {
   return (
     <>
-      {props.letters.split("").map((letter) => (
-        <span className="letter">{letter}</span>
+      {props.letters.split("").map((letter, idx) => (
+        <span key={idx} className="letter">
+          {letter}
+        </span>
       ))}
     </>
   );
