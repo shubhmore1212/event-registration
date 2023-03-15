@@ -1,7 +1,5 @@
 import { DELETE, GET, POST, PUT } from "./api/axios";
 
-// export const getUser = (payload: any) => GET("", payload);
-
 export const addUser = (payload: any) => POST("/users", payload);
 
 export const userLogin = (payload: any) => POST("/users/sign_in", payload);
@@ -17,7 +15,16 @@ export const getOrganizedEvent = (payload: any) =>
 
 export const getAllEvent = (payload: any) => GET(`api/v1/events`, payload);
 
+export const getAllRegistredEvent = (payload: any) =>
+  GET(
+    `api/v1/user_events/get_registered_events?user_id=${payload.id}`,
+    payload
+  );
+
 export const getAllUser = (payload: any) => GET(`api/v1/users`, payload);
+
+export const getAllCount = (payload: any) =>
+  GET(`api/v1/users/count_data`, payload);
 
 export const getByEventId = (payload: any) =>
   GET(`api/v1/events/${payload.id}`, payload);

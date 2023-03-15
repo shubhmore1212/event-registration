@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import BlankLayout from "../../layouts/BlankLayout";
+import BlankLayout from "layouts/BlankLayout";
 
 import { ROUTES } from "../../constants";
 
