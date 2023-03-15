@@ -1,19 +1,26 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { Profiler } from "react";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 import LoginComponent from "./components";
-import { useUserLogin } from "../../hooks/useQueryHooks";
+import { useUserLogin } from "hooks/useQueryHooks";
 
-import { handleNavigate, setLocalStorageUser } from "../../utils/loginFunction";
-import { capitalizeFirstLetter } from "../../utils/stringOperations";
+import { errorNavigation } from "utils/errorHandler";
+import { capitalizeFirstLetter } from "utils/stringOperations";
+import { handleNavigate, stringifyData } from "utils/loginFunction";
 
+import { loginType } from "types/form.types";
 import {
   loginInitialValues,
   LoginValidationSchema,
-} from "../../constants/formConstants";
+} from "constants/formConstants";
 import { ROUTES } from "../../constants";
-import { loginType } from "../../types/form.types";
+import { TOKEN, USER } from "./constants";
+import { callback } from "utils/profilerPerfomance";
+
+const setLocalStorage = (key: string, data: string) => {
+  localStorage.setItem(key, data);
+};
 
 const LoginContainer = () => {
   const navigate = useNavigate();
@@ -23,40 +30,23 @@ const LoginContainer = () => {
     const role_id = response?.data?.status?.data?.role_id;
     const user = response?.data?.status?.data;
 
-    localStorage.setItem("token", accessToken);
-    localStorage.setItem("user", setLocalStorageUser(user));
+    setLocalStorage(TOKEN, accessToken);
+    setLocalStorage(USER, stringifyData(user));
 
-    toast(`${capitalizeFirstLetter(`${user?.first_name}`)} logged in successfully`)
+    toast(
+      `${capitalizeFirstLetter(`${user?.first_name}`)} logged in successfully`
+    );
     navigate(handleNavigate(role_id), { replace: true });
   };
 
-  const errorNavigation = (error: any) => {
-    switch (error.response?.status) {
-      case 400:
-        navigate(ROUTES.ERROR_400, { replace: true });
-        return;
-      case 401:
-        navigate(ROUTES.ERROR_401, { replace: true });
-        return;
-      case 422:
-        navigate(ROUTES.ERROR_422, { replace: true });
-        return;
-      case 404:
-        navigate(ROUTES.ERROR_404, { replace: true });
-        return;
-      default:
-        navigate(ROUTES.ERROR_500, { replace: true });
-        return;
-    }
-  };
-
   const onError = (error: any) => {
-    errorNavigation(error);
+    toast.warn(error.response?.data);
+    errorNavigation(navigate, error);
   };
 
   const { mutate: userLogin } = useUserLogin({ onSuccess, onError });
 
-  const handleSubmit = async (values: loginType) => {
+  const handleSubmit = (values: loginType) => {
     userLogin({ user: { ...values } });
   };
 
@@ -69,13 +59,15 @@ const LoginContainer = () => {
   };
 
   return (
-    <LoginComponent
-      initialValues={loginInitialValues}
-      validationSchema={LoginValidationSchema}
-      handleSubmit={handleSubmit}
-      buttonHandler={imageButtonHandler}
-      homeNavigation={homeNavigation}
-    />
+    <Profiler id="login-page" onRender={callback}>
+      <LoginComponent
+        initialValues={loginInitialValues}
+        validationSchema={LoginValidationSchema}
+        handleSubmit={handleSubmit}
+        buttonHandler={imageButtonHandler}
+        homeNavigation={homeNavigation}
+      />
+    </Profiler>
   );
 };
 

@@ -1,17 +1,18 @@
 import React from "react";
-import { Formik, Form, FormikHelpers } from "formik";
+import { Formik, Form } from "formik";
 
-import Logo from "../../../layouts/Logo";
-import CredentialContent from "../../../layouts/ui/CredentialContent";
-import { FormikControl } from "../../../shared/components/FormikControl";
-import { FORM_OPTIONS } from "../../../shared/constants";
+import Logo from "layouts/Logo";
+import CredentialContent from "layouts/ui/CredentialContent";
+import { FormikControl } from "shared/components/FormikControl";
+import { FORM_OPTIONS } from "shared/constants";
 
-import { loginPropsType } from "../../../types/form.types";
+import { loginPropsType } from "types/form.types";
 
 import "./styles/styles.css";
 
 const LoginForm = (props: loginPropsType) => {
-  const { initialValues, validationSchema, handleSubmit ,homeNavigation} = props;
+  const { initialValues, validationSchema, handleSubmit, homeNavigation } =
+    props;
 
   return (
     <>

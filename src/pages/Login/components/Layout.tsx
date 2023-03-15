@@ -1,9 +1,9 @@
 import React from "react";
 
 import LoginForm from "./LoginForm";
-import CredentialImage from "../../../layouts/ui/CredentialImage";
+import CredentialImage from "layouts/ui/CredentialImage";
 
-import { loginPropsType } from "../../../types/form.types";
+import { loginPropsType } from "types/form.types";
 
 import "./styles/styles.css";
 
