@@ -1,14 +1,14 @@
 import React from "react";
 import { Form, Formik } from "formik";
 
-import Logo from "../../../layouts/Logo";
-import CredentialContent from "../../../layouts/ui/CredentialContent";
-import { FormikControl } from "../../../shared/components/FormikControl";
+import Logo from "layouts/Logo";
+import CredentialContent from "layouts/ui/CredentialContent";
+import { FormikControl } from "shared/components/FormikControl";
 
-import { FORM_OPTIONS } from "../../../shared/constants";
-import { ROLES } from "../../../constants/constants";
+import { FORM_OPTIONS } from "shared/constants";
+import { ROLES } from "constants/constants";
 
-import { ISignUpFormProps } from "../../../types/form.types";
+import { ISignUpFormProps } from "types/form.types";
 
 import "./styles/styles.css";
 

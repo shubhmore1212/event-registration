@@ -1,9 +1,9 @@
 import React from "react";
 
-import CredentialImage from "../../../layouts/ui/CredentialImage";
+import CredentialImage from "layouts/ui/CredentialImage";
 import SignUpForm from "./SignUpForm";
 
-import { ISignUpFormProps } from "../../../types/form.types";
+import { ISignUpFormProps } from "types/form.types";
 
 import "./styles/styles.css";
 
