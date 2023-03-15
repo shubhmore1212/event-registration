@@ -9,7 +9,7 @@ interface IProps {
 }
 
 export const SelectBox = (props: IProps): ReactElement => {
-  const { name, label, options, ...rest } = props;
+  const { name, label, options } = props;
   return (
     <div className="form-container">
       <div className="form-control">

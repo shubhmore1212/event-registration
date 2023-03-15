@@ -8,8 +8,8 @@ import Typography from "@mui/material/Typography";
 import { Box } from "@mui/system";
 import { Avatar, CardHeader, Chip, IconButton, Paper } from "@mui/material";
 
-import { colors, length } from "../../constants/constants";
-import { EVENT } from "../../assets";
+import { colors, length } from "constants/constants";
+import { EVENT } from "assets";
 
 interface IProps {
   event: any;
@@ -17,7 +17,6 @@ interface IProps {
 
 const MediaCard = (props: IProps) => {
   const { event } = props;
-  console.log(event);
 
   return (
     <Box
@@ -61,7 +60,7 @@ const MediaCard = (props: IProps) => {
           />
           <CardMedia
             sx={{ height: 250 }}
-            image={EVENT[Math.floor(Math.random() * (EVENT.length))]}
+            image={EVENT[Math.floor(Math.random() * EVENT.length)]}
             title="green iguana"
           />
           <CardContent>

@@ -42,3 +42,13 @@
 }
 
 /* Mouse Pop Over List */
+
+/* Loader */
+
+.loading-spinner {
+  position: absolute;
+  top: 40vh;
+  left: 42vw;
+}
+
+/* End Loader */

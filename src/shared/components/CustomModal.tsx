@@ -1,6 +1,5 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 
@@ -17,9 +16,7 @@ const style = {
 };
 
 const CustomModal = (props: any) => {
-  const { heading, childComponent, open, toggleModal, event } = props;
-  console.log("Evenet",event);
-  
+  const { heading, childComponent, open, toggleModal} = props;
 
   return (
     <div>
