@@ -23,5 +23,5 @@ export const ROLES = [
   },
 ];
 
-export const colors = ["red", , "pink", "blue", "green", "violet"];
+export const colors = ["red", "yellow", "pink", "blue", "green", "violet"];
 export const length = colors.length;

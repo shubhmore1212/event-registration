@@ -1,14 +1,25 @@
+import { lazy } from "react";
+
 import LoginContainer from "./pages/Login";
 import LandingContainer from "./pages/LandingPage";
-import IMAGES from "./assets";
 import SignUp from "./pages/SignUp";
+
+import IMAGES from "./assets";
+
+const AdminContainer=lazy(()=>import("./pages/Admin/Dashboard"))
+const OrganizerContainer=lazy(()=>import("./pages/Organizer/Dashboard"))
+const CreateEvent=lazy(()=>import("./pages/Organizer/CreateEvent"))
+const UpdateEventForm=lazy(()=>import("./pages/Organizer/UpdateEvent"))
+const DisplayEvent=lazy(()=>import("./pages/Organizer/DisplayEvent"))
+const RegistrantContainer=lazy(()=>import("./pages/Registrant/Dashboard"))
+const DisplayRegisteredEvents=lazy(()=>import("./pages/Registrant/DisplayRegisteredEvents"))
 
 export const ROUTES = {
   HOME: "/",
   LOGIN: "/login",
   SIGNUP: "/signup",
   //Error
-  ERROR_400: "/error-404",
+  ERROR_400: "/error-400",
   ERROR_401: "/error-401",
   ERROR_404: "/error-404",
   ERROR_422: "/error-422",
@@ -17,25 +28,14 @@ export const ROUTES = {
   ADMIN: "/admin",
   //Organizer
   ORGANIZER: "/organizer",
-  CREATE_EVENT:"/create-event",
+  CREATE_EVENT: "/create-event",
+  UPDATE_EVENT: "/update-form/:event_id",
   //Register
-  REGISTER: "/register",
+  REGISTERANT: "/register",
+  REGISTERED_EVENT: "/registred-event",
+  //All roles
+  DISPLAY_EVENT: "/display-event/:event_id",
 };
-
-export const PUBLIC_ROUTES = [
-  {
-    path: ROUTES.HOME,
-    component: LandingContainer,
-  },
-  {
-    path: ROUTES.LOGIN,
-    component: LoginContainer,
-  },
-  {
-    path: ROUTES.SIGNUP,
-    component: SignUp,
-  },
-];
 
 export const ERROR = {
   error400Props: {
@@ -69,3 +69,58 @@ export const ERROR = {
     errorImg: IMAGES.Error500,
   },
 };
+
+export const PUBLIC_ROUTES = [
+  {
+    path: ROUTES.HOME,
+    component: LandingContainer,
+  },
+  {
+    path: ROUTES.LOGIN,
+    component: LoginContainer,
+  },
+  {
+    path: ROUTES.SIGNUP,
+    component: SignUp,
+  },
+];
+
+export const ADMIN_ROUTES = [
+  {
+    path: ROUTES.ADMIN,
+    component: AdminContainer,
+  },
+];
+
+export const ORGANIZER_ROUTES = [
+  {
+    path: ROUTES.ORGANIZER,
+    component: OrganizerContainer,
+  },
+  {
+    path: ROUTES.CREATE_EVENT,
+    component: CreateEvent,
+  },
+  {
+    path: ROUTES.UPDATE_EVENT,
+    component: UpdateEventForm,
+  },
+];
+
+export const REGISTRANT_ROUTES = [
+  {
+    path: ROUTES.REGISTERANT,
+    component: RegistrantContainer,
+  },
+  {
+    path: ROUTES.REGISTERED_EVENT,
+    component: DisplayRegisteredEvents,
+  },
+];
+
+export const ALL_ROLE_ROUTES = [
+  {
+    path: ROUTES.DISPLAY_EVENT,
+    component: DisplayEvent,
+  },
+];
