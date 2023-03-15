@@ -1,10 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { ROUTES } from "../constants";
-import MouseOverPopover from "../shared/components/MouseOverPopover";
-import SearchBox from "../shared/components/SearchBox";
 
 import Logo from "./Logo";
+import SearchBox from "../shared/components/SearchBox";
+import MouseOverPopover from "../shared/components/MouseOverPopover";
+
+import { ROUTES } from "../constants";
 
 import "./styles/styles.css";
 
@@ -18,11 +19,10 @@ interface IProps {
   userName?: string;
 }
 
-const UserNavbar = (props: any) => {
+const UserNavbar = (props: IProps) => {
   const navigate = useNavigate();
   const {
     isSearchBox,
-    isAdmin,
     isOrganizer,
     isRegistrant,
     buttonHandler,
@@ -48,7 +48,6 @@ const UserNavbar = (props: any) => {
               <SearchBox
                 searchInput={""}
                 searchHandler={() => {
-                  console.log("search");
                 }}
               />
               <button className="search-btn">Search</button>

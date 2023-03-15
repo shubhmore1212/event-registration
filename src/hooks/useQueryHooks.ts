@@ -1,10 +1,13 @@
 import { AxiosError } from "axios";
 import { useMutation, useQuery } from "react-query";
+
 import {
   addUser,
   createEvent,
   deleteEvent,
+  getAllCount,
   getAllEvent,
+  getAllRegistredEvent,
   getAllUser,
   getByEventId,
   getOrganizedEvent,
@@ -12,12 +15,14 @@ import {
   updateEvent,
   userLogin,
 } from "../services/user.services";
+
 import {
   RQ_KEY_EVENT_BY_ID,
+  RQ_KEY_GET_ALL_COUNT,
   RQ_KEY_GET_ALL_EVENT,
+  RQ_KEY_GET_ALL_REGISTERED_EVENTS,
   RQ_KEY_GET_ALL_USER,
   RQ_KEY_ORGANIZED_EVENT,
-  RQ_KEY_USER,
 } from "./constants";
 
 export const useAddUser = (props: any) => {
@@ -94,12 +99,38 @@ export const useGetAllEvent = (props: any) => {
   );
 };
 
+export const useGetAllRegistredEvent = (props: any) => {
+  const { onSuccess, onError, payload } = props;
+
+  return useQuery<any, AxiosError>(
+    [RQ_KEY_GET_ALL_REGISTERED_EVENTS],
+    () => getAllRegistredEvent(payload),
+    {
+      onSuccess,
+      onError,
+    }
+  );
+};
+
 export const useGetAllUsers = (props: any) => {
   const { onSuccess, onError, payload } = props;
 
   return useQuery<any, AxiosError>(
     [RQ_KEY_GET_ALL_USER],
     () => getAllUser(payload),
+    {
+      onSuccess,
+      onError,
+    }
+  );
+};
+
+export const useGetAllCounts = (props: any) => {
+  const { onSuccess, onError, payload } = props;
+
+  return useQuery<any, AxiosError>(
+    [RQ_KEY_GET_ALL_COUNT],
+    () => getAllCount(payload),
     {
       onSuccess,
       onError,

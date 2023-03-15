@@ -1,12 +1,11 @@
 import { ReactNode } from "react";
-import { styled } from "@mui/material/styles";
-import Box, { BoxProps } from "@mui/material/Box";
-import Navbar from "./Navbar";
-import UserNavbar from "./UserNavbar";
-import FooterContent from "../shared/components/FooterContent";
-import "./styles/styles.css";
+import Box from "@mui/material/Box";
 import { Paper } from "@mui/material";
 
+import UserNavbar from "./UserNavbar";
+import FooterContent from "../shared/components/FooterContent";
+
+import "./styles/styles.css";
 interface BlankLayoutProps {
   children: ReactNode;
   isSearchBox?: boolean;
@@ -29,6 +28,7 @@ const UserLayout = (props: BlankLayoutProps) => {
     homeNavigation,
     userName
   } = props;
+  
   return (
     <>
       <div className="user-layout">
