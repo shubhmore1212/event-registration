@@ -1,3 +1,4 @@
+import { LoginValidationSchemaType } from "constants/formConstants";
 import { FormikHelpers } from "formik";
 
 export interface loginType {
@@ -5,10 +6,13 @@ export interface loginType {
   password: string;
 }
 
-export interface loginPropsType {
+export interface signInPropsType {
   initialValues: loginType;
-  validationSchema: any;
+  validationSchema: LoginValidationSchemaType;
   handleSubmit: (values: any, actions: FormikHelpers<any>) => void;
+}
+
+export interface loginPropsType extends signInPropsType {
   buttonHandler: () => void;
   homeNavigation?: () => void;
 }
@@ -23,10 +27,13 @@ export type ISignUpFormValues = {
   contact_no: string;
 };
 
-export interface ISignUpFormProps {
+export interface registerFormProps {
   initialValues: ISignUpFormValues;
   validationSchema: any;
   handleSubmit: (values: any, actions: FormikHelpers<any>) => void;
+}
+
+export interface ISignUpFormProps extends registerFormProps {
   buttonHandler: () => void;
   homeNavigation?: () => void;
 }

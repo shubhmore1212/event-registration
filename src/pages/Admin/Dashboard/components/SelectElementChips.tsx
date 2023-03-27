@@ -12,15 +12,15 @@ export default function SelectElementChips(props: IProps) {
   const {state,toggleState}=props;
   
   return (
-    <Stack direction="row" spacing={2}>
+    <Stack data-testid="select-chip-div" direction="row" spacing={2}>
       <Chip
-        id="chip"
+        id="chip1"
         label="Events"
         onClick={toggleState}
         variant={state ? "filled" : "outlined"}
       />
       <Chip
-        id="chip"
+        id="chip2"
         label="Users"
         onClick={toggleState}
         variant={!state ? "filled" : "outlined"}

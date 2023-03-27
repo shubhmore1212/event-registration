@@ -40,8 +40,6 @@ const AdminContainer = () => {
   const {
     data: users,
     isLoading: isUserLoading,
-    isError: isUserError,
-    error: userError,
   } = useGetAllUsers({
     onError,
     payload: { ...user, accessToken },
@@ -50,8 +48,6 @@ const AdminContainer = () => {
   const {
     data: counts,
     isLoading: isCountLoading,
-    isError: isCountError,
-    error: countError,
   } = useGetAllCounts({
     onError,
     payload: { ...user, accessToken },

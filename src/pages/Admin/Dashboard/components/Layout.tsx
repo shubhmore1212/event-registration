@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Card, CardContent, Paper, Typography } from "@mui/material";
+import AdminCards from "./AdminCards";
 
 import CommonTable from "./CommonTable";
 import SelectElementChips from "./SelectElementChips";
@@ -16,49 +16,15 @@ const AdminLayout = (props: any) => {
   ];
 
   return (
-    <>
-      <div className="admin-layout">
-        {cardData.map((card: any) => (
-          <Box
-            key={card}
-            sx={{
-              display: "flex",
-              flexWrap: "wrap",
-              "& > :not(style)": {
-                m: 1,
-                width: "345px",
-              },
-            }}
-          >
-            <Paper elevation={3}>
-              <Card sx={{ maxWidth: 345 }}>
-                <div className="count-section">
-                  <div className="circle-count">
-                    <h1 id="count-heading">{card.data}</h1>
-                  </div>
-                </div>
-                <CardContent>
-                  <Typography
-                    sx={{ display: "flex", justifyContent: "center" }}
-                    gutterBottom
-                    variant="h5"
-                    component="div"
-                  >
-                    {card.user}
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Paper>
-          </Box>
-        ))}
-      </div>
+    <div data-testid="layout-root-div">
+      <AdminCards cardData={cardData} />
       <div className="admin-chips">
         <SelectElementChips {...props} />
       </div>
       <div className="admin-table">
         <CommonTable {...props} />
       </div>
-    </>
+    </div>
   );
 };
 

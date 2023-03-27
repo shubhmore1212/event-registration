@@ -11,8 +11,9 @@ interface IProps {
 
 const CredentialImage: React.FC<IProps> = (props) => {
   const { heading, paragraph, buttonName, buttonHandler } = props;
+
   return (
-    <div className="login-image-content">
+    <div data-testid="credential-image-root-div" className="login-image-content">
       <div id="sub-heading">
         <h2>{heading}</h2>
       </div>

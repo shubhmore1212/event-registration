@@ -25,27 +25,33 @@ const Error = (props: IErrors) => {
   };
 
   return (
-    <BlankLayout homeNavigation={handleNavigate}>
-      <Box className="content-center" sx={{ mt: 5 }}>
-        <Box className="error-content">
-          <Box>
-            <Typography variant="h1">{errorNumber}</Typography>
-            <Typography className="error-description" variant="h5">
-              {errorDescription}
-            </Typography>
-            <Typography variant="body2">{errorBody}</Typography>
+    <div data-testid="error-root-div">
+      <BlankLayout  homeNavigation={handleNavigate}>
+        <Box className="content-center" sx={{ mt: 5 }}>
+          <Box className="error-content">
+            <Box>
+              <Typography variant="h1">{errorNumber}</Typography>
+              <Typography className="error-description" variant="h5">
+                {errorDescription}
+              </Typography>
+              <Typography variant="body2">{errorBody}</Typography>
+            </Box>
+            <img
+              className="error-img"
+              alt="error-illustration"
+              src={errorImg}
+            />
+            <Button
+              className="error-back-btn"
+              variant="contained"
+              onClick={handleNavigate}
+            >
+              Back to Home
+            </Button>
           </Box>
-          <img className="error-img" alt="error-illustration" src={errorImg} />
-          <Button
-            className="error-back-btn"
-            variant="contained"
-            onClick={handleNavigate}
-          >
-            Back to Home
-          </Button>
         </Box>
-      </Box>
-    </BlankLayout>
+      </BlankLayout>
+     </div>
   );
 };
 

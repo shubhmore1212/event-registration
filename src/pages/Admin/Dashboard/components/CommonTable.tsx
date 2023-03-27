@@ -63,7 +63,7 @@ export default function CommonTable(props: any) {
   };
 
   return (
-    <Paper sx={{ width: "100%", overflow: "hidden" }}>
+    <Paper data-testid="my-root-div" sx={{ width: "100%", overflow: "hidden" }}>
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
@@ -96,9 +96,8 @@ export default function CommonTable(props: any) {
                   .map((row: any) => (
                     <TableRow
                       hover
-                      role="checkbox"
                       tabIndex={-1}
-                      key={row.code}
+                      key={row.id}
                     >
                       {eventColumns.map((column: EventColumn) => {
                         const value = row[column.id];
@@ -121,9 +120,8 @@ export default function CommonTable(props: any) {
                   .map((row: any) => (
                     <TableRow
                       hover
-                      role="checkbox"
                       tabIndex={-1}
-                      key={row.code}
+                      key={row.id}
                     >
                       {userColumns.map((column: UserColumn) => {
                         const value = row[column.id];

@@ -22,7 +22,7 @@ export const InputBox = (props: IProps): ReactElement => {
     <div className="form-container">
       <div className="form-control">
         <label htmlFor={name}>{label}</label>
-        <Field type={type} name={name} {...rest} />
+        <Field type={type} name={name} {...rest} label={label}/>
       </div>
       <ErrorMessage name={name} component={TextError} />
     </div>

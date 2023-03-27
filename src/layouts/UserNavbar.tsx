@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-import Logo from "./Logo";
+import Logo from "../shared/components/Logo";
 import SearchBox from "../shared/components/SearchBox";
 import MouseOverPopover from "../shared/components/MouseOverPopover";
 

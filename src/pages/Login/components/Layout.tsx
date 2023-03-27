@@ -8,6 +8,7 @@ import { loginPropsType } from "types/form.types";
 import "./styles/styles.css";
 
 const LoginLayout: React.FC<loginPropsType> = (props) => {
+  
   return (
     <div className="login-container">
       <div className="login-form">

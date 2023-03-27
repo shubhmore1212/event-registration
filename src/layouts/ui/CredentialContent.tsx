@@ -12,7 +12,7 @@ const CredentialContent: React.FC<IProps> = (props) => {
 
   return (
     <>
-      <div className="sub-heading">
+      <div data-testid="credential-content-root-div" className="sub-heading">
         <h2>{heading}</h2>
       </div>
       <div>

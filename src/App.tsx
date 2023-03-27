@@ -1,4 +1,4 @@
-import React, { lazy} from "react";
+import React, { lazy } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 
 import RequireAuth from "./RequireAuth";
@@ -23,8 +23,6 @@ interface RouteProps {
 }
 
 const Error = lazy(() => import("./pages/Error/Error"));
-
-
 
 const App = () => {
   return (
@@ -108,6 +106,7 @@ const App = () => {
         <Route path="*" element={<Navigate to={ROUTES.ERROR_404} replace />} />
       </Route>
     </Routes>
+    // --collectCoverageFrom='src/components/**/*.{ts,tsx}' --collectCoverageFrom='!src/components/**/*.{types,stories,constants,test,spec}.{ts,tsx}'
   );
 };
 

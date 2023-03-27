@@ -1,7 +1,20 @@
 import * as Yup from "yup";
 import "yup-phone";
+import { OptionalObjectSchema } from "yup/lib/object";
+import { RequiredStringSchema } from "yup/lib/string";
+import { AnyObject } from "yup/lib/types";
 
-export const SignUpInitialValues = {
+interface SignUpType {
+  first_name: string;
+  last_name: string;
+  contact_no: string;
+  role_id: string;
+  email: string;
+  password: string;
+  re_password: string;
+}
+
+export const SignUpInitialValues: SignUpType = {
   first_name: "",
   last_name: "",
   contact_no: "",
@@ -11,7 +24,21 @@ export const SignUpInitialValues = {
   re_password: "",
 };
 
-export const signUpValidationSchema = Yup.object({
+export type signUpValidationSchemaType = OptionalObjectSchema<{
+  first_name: RequiredStringSchema<string | undefined, AnyObject>;
+  last_name: RequiredStringSchema<string | undefined, AnyObject>;
+  contact_no: RequiredStringSchema<string | undefined, AnyObject>;
+  role_id: RequiredStringSchema<string | undefined, AnyObject>;
+  email: RequiredStringSchema<string | undefined, AnyObject>;
+  password: RequiredStringSchema<string | undefined, AnyObject>;
+  re_password: Yup.StringSchema<
+    string | undefined,
+    AnyObject,
+    string | undefined
+  >;
+}>;
+
+export const signUpValidationSchema:signUpValidationSchemaType = Yup.object({
   first_name: Yup.string().trim().required("Required*"),
   last_name: Yup.string().trim().required("Required*"),
   contact_no: Yup.string()
@@ -38,12 +65,22 @@ export const signUpValidationSchema = Yup.object({
 });
 
 /* login form */
-export const loginInitialValues = {
+interface loginType {
+  email: string;
+  password: string;
+}
+
+export type LoginValidationSchemaType = OptionalObjectSchema<{
+  email: RequiredStringSchema<string | undefined, AnyObject>;
+  password: RequiredStringSchema<string | undefined, AnyObject>;
+}>;
+
+export const loginInitialValues: loginType = {
   email: "",
   password: "",
 };
 
-export const LoginValidationSchema = Yup.object({
+export const LoginValidationSchema: LoginValidationSchemaType = Yup.object({
   email: Yup.string()
     .email("Please enter valid email")
     .trim()
